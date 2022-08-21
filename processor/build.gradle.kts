@@ -9,8 +9,9 @@ repositories {
 
 dependencies {
     val kspVersion: String by project
+    val kotlinVersion: String by project
     implementation(group = "com.google.devtools.ksp", name = "symbol-processing-api" , version = kspVersion)
-
+    implementation(group = "org.jetbrains.kotlin", name = "kotlin-reflect", version = kotlinVersion)
     kspTest(project(":processor"))
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
