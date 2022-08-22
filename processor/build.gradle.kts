@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     id("com.google.devtools.ksp")
+    `maven-publish`
 }
 
 repositories {
@@ -32,4 +33,35 @@ kotlin {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("jitpack") {
+            version = "1.0.0"
+            group = "com.github.SimonMarquis"
+            artifactId = "processor"
+            from(components["kotlin"])
+            pom {
+                name.set("SealedObjectInstances")
+                description.set("A Kotlin Symbol Processor to list sealed object instances.")
+                url.set("https://github.com/SimonMarquis/SealedObjectInstances")
+                licenses {
+                    license {
+                        name.set("Apache-2.0 license")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        name.set("Simon Marquis")
+                        email.set("contact@simon-marquis.fr")
+                    }
+                }
+                scm {
+                    url.set("https://github.com/SimonMarquis/SealedObjectInstances")
+                }
+            }
+        }
+    }
 }
