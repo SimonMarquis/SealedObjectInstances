@@ -48,3 +48,39 @@ And then you'll have access to the `sealedObjectInstances()` extension on the co
 ```kotlin
 val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 ```
+
+## Setup
+
+In the module's build script, apply the `com.google.devtools.ksp` plugin with the current Kotlin version and add this library to the list of dependencies.
+
+```kotlin
+plugins {
+    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
+}
+
+repositories {
+    maven {
+        url = uri("https://jitpack.io")
+    }
+}
+
+dependencies {
+    implementation("com.github.SimonMarquis:SealedObjectInstances:<latest-version>")
+    ksp("com.github.SimonMarquis:SealedObjectInstances:<latest-version>")
+}
+```
+
+## Make IDE aware of generated code
+
+By default, IntelliJ IDEA or other IDEs don't know about the generated code. So it will mark references to generated symbols unresolvable. To make an IDE be able to reason about the generated symbols, mark the following paths as generated source roots:
+
+```kotlin
+kotlin {
+    sourceSets.main {
+        kotlin.srcDir("build/generated/ksp/main/kotlin")
+    }
+    sourceSets.test {
+        kotlin.srcDir("build/generated/ksp/test/kotlin")
+    }
+}
+```
