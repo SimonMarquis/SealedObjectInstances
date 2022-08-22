@@ -1,4 +1,5 @@
-# Sealed Object Instances [![Status](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml/badge.svg)](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml)
+# Sealed Object Instances [![Status](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml/badge.svg)](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml) [![](https://jitpack.io/v/SimonMarquis/SealedObjectInstances.svg)](https://jitpack.io/#SimonMarquis/SealedObjectInstances)
+
 
 > A **K**otlin **S**ymbol **P**rocessor to list sealed object instances.
 
