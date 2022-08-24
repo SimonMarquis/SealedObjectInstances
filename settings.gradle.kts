@@ -14,3 +14,4 @@ pluginManagement {
 
 rootProject.name = "sealed-object-instances"
 include("processor")
+include("app")
