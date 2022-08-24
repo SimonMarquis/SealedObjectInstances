@@ -26,3 +26,10 @@ jobs:
         with:
           name: test-reports
           path: processor/build/reports/tests/test
+      - name: Build Maven artifact
+        run: ./gradlew publishAllPublicationsToMavenLocalRepository --stacktrace
+      - name: Upload Maven artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: maven
+          path: build/.m2/repository

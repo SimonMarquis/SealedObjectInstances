@@ -36,6 +36,11 @@ tasks.test {
 }
 
 publishing {
+    repositories {
+        mavenLocal {
+            url = uri(rootProject.layout.buildDirectory.dir(".m2/repository"))
+        }
+    }
     publications {
         create<MavenPublication>("jitpack") {
             version = "1.0.0"
