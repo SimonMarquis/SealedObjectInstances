@@ -75,13 +75,22 @@ dependencies {
 
 By default, IntelliJ IDEA or other IDEs don't know about the generated code. So it will mark references to generated symbols unresolvable. To make an IDE be able to reason about the generated symbols, mark the following paths as generated source roots:
 
-```kotlin
-kotlin {
-    sourceSets.main {
-        kotlin.srcDir("build/generated/ksp/main/kotlin")
-    }
-    sourceSets.test {
-        kotlin.srcDir("build/generated/ksp/test/kotlin")
-    }
-}
-```
+- Android project
+  ```kotlin
+  androidComponents.onVariants {
+      kotlin.sourceSets.findByName(it.name)?.kotlin?.srcDirs(
+          file("$buildDir/generated/ksp/${it.name}/kotlin")
+      )
+  }
+  ```
+- Kotlin JVM project
+  ```kotlin
+  kotlin {
+      sourceSets.main {
+          kotlin.srcDir("build/generated/ksp/main/kotlin")
+      }
+      sourceSets.test {
+          kotlin.srcDir("build/generated/ksp/test/kotlin")
+      }
+  }
+  ```
