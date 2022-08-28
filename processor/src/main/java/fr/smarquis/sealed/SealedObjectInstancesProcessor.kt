@@ -44,7 +44,10 @@ private class SealedObjectInstancesProcessor(
     }
 
     @OptIn(KspExperimental::class)
-    private fun KSClassDeclaration.annotations() = getAnnotationsByType(SealedObjectInstances::class).toList()
+    private fun KSClassDeclaration.annotations() = getAnnotationsByType(SealedObjectInstances::class).toList().also {
+        if (it.size == it.distinctBy(SealedObjectInstances::name).size) return@also
+        else environment.logger.error("Duplicated names: ${it.groupingBy(SealedObjectInstances::name).eachCount()}")
+    }
 
     private fun KSClassDeclaration.createNewFile() = environment.codeGenerator.createNewFile(
         dependencies = Dependencies(
