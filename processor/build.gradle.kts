@@ -45,7 +45,7 @@ publishing {
         create<MavenPublication>("jitpack") {
             version = "1.0.0"
             group = "com.github.SimonMarquis"
-            artifactId = "processor"
+            artifactId = "SealedObjectInstances"
             from(components["kotlin"])
             pom {
                 name.set("SealedObjectInstances")
