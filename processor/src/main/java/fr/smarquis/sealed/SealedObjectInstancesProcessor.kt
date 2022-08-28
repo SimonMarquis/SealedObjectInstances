@@ -1,5 +1,7 @@
 package fr.smarquis.sealed
 
+import com.google.devtools.ksp.KspExperimental
+import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
@@ -10,7 +12,9 @@ import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.symbol.Modifier.SEALED
 import com.google.devtools.ksp.validate
-import org.intellij.lang.annotations.Language
+import java.io.OutputStreamWriter
+import kotlin.reflect.KClass
+
 
 class SealedObjectInstancesProcessorProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
@@ -26,42 +30,52 @@ private class SealedObjectInstancesProcessor(
             .filterIsInstance<KSClassDeclaration>()
             .filter(KSNode::validate)
             .filter { SEALED in it.modifiers }
-            .forEach(::createSealedObjectInstancesExtension)
+            .forEach(::process)
         return emptyList()
     }
 
-    private fun createSealedObjectInstancesExtension(parent: KSClassDeclaration) {
-        val file = parent.containingFile!!
-        val simpleName = parent.simpleName.asString()
-        val qualifiedName = parent.qualifiedName!!.asString()
-        val sealedObjectInstances = parent.sealedObjectInstances()
-        val packageName = file.packageName.asString()
-
-        @Language("kotlin")
-        val kotlin = """
-            ${if (packageName.isNotBlank()) "package $packageName" else ""}
-            
-            import kotlin.reflect.KClass
-            import $qualifiedName
-            
-            /** @return The list of sealed object instances of type [$simpleName]. */
-            @Suppress("UnusedReceiverParameter")
-            fun KClass<$simpleName>.sealedObjectInstances(): Set<$simpleName> = ${sealedObjectInstances.buildSet()}
-            
-        """.trimIndent()
-
-        environment.codeGenerator.createNewFile(
-            dependencies = Dependencies(
-                aggregating = true,
-                sources = sealedObjectInstances.mapNotNull { it.containingFile }.plus(file).distinct().toTypedArray()
-            ),
-            packageName = packageName,
-            fileName = "$" + parent.simpleName.asString()
-        ).write(kotlin.toByteArray())
+    private fun process(declaration: KSClassDeclaration) {
+        declaration.createNewFile().writer().use {
+            it.appendHeader(declaration)
+            declaration.annotations().forEach { annotation ->
+                it.appendMethod(declaration, annotation)
+            }
+        }
     }
 
-    private fun Set<KSClassDeclaration>.buildSet() = joinToString(prefix = "setOf(", separator = ", ", postfix = ")") {
-        it.qualifiedName!!.asString()
+    @OptIn(KspExperimental::class)
+    private fun KSClassDeclaration.annotations() = getAnnotationsByType(SealedObjectInstances::class).toList()
+
+    private fun KSClassDeclaration.createNewFile() = environment.codeGenerator.createNewFile(
+        dependencies = Dependencies(
+            aggregating = true,
+            sources = sealedObjectInstances().map { it.containingFile!! }.plus(containingFile!!).toTypedArray()
+        ),
+        packageName = containingFile!!.packageName.asString(),
+        fileName = "${simpleName.asString()}\$sealedObjectInstances"
+    )
+
+    private fun OutputStreamWriter.appendHeader(klass: KSClassDeclaration) = apply {
+        val packageName = klass.containingFile!!.packageName.asString()
+        if (packageName.isNotBlank()) appendLine("package $packageName\n")
+    }
+
+    @Suppress("UnusedReceiverParameter")
+    private fun OutputStreamWriter.appendMethod(sealed: KSClassDeclaration, annotation: SealedObjectInstances) {
+        val sealedClassName = sealed.qualifiedName!!.asString()
+        val methodName = annotation.name.takeUnless(String::isEmpty)
+        val rawClassName = annotation.rawType.kClass.qualifiedName
+        val collectionBuilder = sealed.sealedObjectInstances().joinToString(
+            prefix = annotation.rawType.builder.name + "(",
+            separator = ", ",
+            postfix = ")",
+        ) { it.qualifiedName!!.asString() }
+
+        // language=kotlin
+        """
+        /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */
+        fun ${KClass::class.qualifiedName}<$sealedClassName>.$methodName(): $rawClassName<$sealedClassName> = $collectionBuilder
+        """.trimIndent().let(::appendLine)
     }
 
 }
