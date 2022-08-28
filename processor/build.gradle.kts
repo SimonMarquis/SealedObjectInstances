@@ -43,7 +43,6 @@ publishing {
     }
     publications {
         create<MavenPublication>("jitpack") {
-            version = "1.0.0"
             group = "com.github.SimonMarquis"
             artifactId = "SealedObjectInstances"
             from(components["kotlin"])
