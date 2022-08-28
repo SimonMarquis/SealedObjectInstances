@@ -94,3 +94,26 @@ By default, IntelliJ IDEA or other IDEs don't know about the generated code. So 
       }
   }
   ```
+
+## Configuration
+
+`SealedObjectInstances` annotation can be configured to produce different outputs, and is also repeatable:
+
+```kotlin
+@SealedObjectInstances
+@SealedObjectInstances(name = "values", rawType = Array)
+sealed class FeatureFlag { /*...*/ }
+```
+
+This code will produce these two extensions:
+
+```kotlin
+// The default extension
+fun KClass<FeatureFlag>.sealedObjectInstances(): Set<FeatureFlag>
+// The custom extension with different name and raw type
+fun KClass<FeatureFlag>.values(): Array<FeatureFlag>
+```
+
+## Known issues
+
+- Having multiple sealed classes/interfaces with the same name in the same package is currently not supported, and the KSP will fail.
