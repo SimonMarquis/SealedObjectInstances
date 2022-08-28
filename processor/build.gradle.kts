@@ -17,6 +17,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation("com.github.tschuchortdev:kotlin-compile-testing-ksp:1.4.9")
 }
 
 kotlin {
