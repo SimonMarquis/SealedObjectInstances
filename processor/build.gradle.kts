@@ -9,15 +9,13 @@ repositories {
 }
 
 dependencies {
-    val kspVersion: String by project
-    val kotlinVersion: String by project
-    implementation(group = "com.google.devtools.ksp", name = "symbol-processing-api" , version = kspVersion)
-    implementation(group = "org.jetbrains.kotlin", name = "kotlin-reflect", version = kotlinVersion)
+    implementation(libs.kspApi)
+    implementation(libs.kotlinReflect)
     kspTest(projects.processor)
-    testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
-    testImplementation("com.github.tschuchortdev:kotlin-compile-testing-ksp:1.4.9")
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.junitApi)
+    testRuntimeOnly(libs.junitRuntime)
+    testImplementation(libs.kotlinCompileTestingKsp)
 }
 
 kotlin {

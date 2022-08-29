@@ -1,11 +1,7 @@
-pluginManagement {
-    val kotlinVersion: String by settings
-    val kspVersion: String by settings
+dependencyResolutionManagement {
 
-    plugins {
-        id("com.google.devtools.ksp") version kspVersion
-        kotlin("jvm") version kotlinVersion
-    }
+}
+pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
