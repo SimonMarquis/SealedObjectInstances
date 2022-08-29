@@ -17,6 +17,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":processor"))
-    ksp(project(":processor"))
+    implementation(projects.processor)
+    ksp(projects.processor)
 }
