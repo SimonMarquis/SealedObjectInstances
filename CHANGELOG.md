@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.2.0]
+
+_2022-09-01_
+
+- Allow nested references to extensions by removing unnecessary KSP validation step
+
 ## [1.1.0]
 
 _2022-08-28_
@@ -15,6 +21,7 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.2.0
 [1.1.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.1.0
 [1.0.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.0.0
