@@ -9,9 +9,7 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.symbol.Modifier.SEALED
-import com.google.devtools.ksp.validate
 import java.io.OutputStreamWriter
 import kotlin.reflect.KClass
 
@@ -28,7 +26,6 @@ private class SealedObjectInstancesProcessor(
     override fun process(resolver: Resolver): List<KSAnnotated> {
         resolver.getSymbolsWithAnnotation(SealedObjectInstances::class.qualifiedName!!)
             .filterIsInstance<KSClassDeclaration>()
-            .filter(KSNode::validate)
             .filter { SEALED in it.modifiers }
             .forEach(::process)
         return emptyList()
