@@ -40,7 +40,7 @@ class DuplicatedNamesTest {
         /* Then */
         assertEquals(ExitCode.COMPILATION_ERROR, result.exitCode)
         assertTrue("Error message is printed") {
-            "e: [ksp] Duplicated names: {sealedObjectInstances=1, values=2}" in result.messages
+            "MySealedClass.kt:7: Duplicated names: {sealedObjectInstances=1, values=2}" in result.messages
         }
     }
 
