@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [1.3.0]
+
+_2022-09-14_
+
+- Add support for visibility modifier
+- Add support for generic type parameters
+
 ## [1.2.0]
 
 _2022-09-01_
@@ -21,7 +28,8 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.2.0...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.3.0...HEAD
+[1.2.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.3.0
 [1.2.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.2.0
 [1.1.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.1.0
 [1.0.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.0.0
