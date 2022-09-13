@@ -1,6 +1,7 @@
 package fr.smarquis.sealed
 
 import fr.smarquis.sealed.SealedObjectInstances.RawType.Set
+import fr.smarquis.sealed.SealedObjectInstances.Visibility.Unspecified
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction1
 
@@ -10,6 +11,7 @@ import kotlin.reflect.KFunction1
 annotation class SealedObjectInstances(
     val name: String = "sealedObjectInstances",
     val rawType: RawType = Set,
+    val visibility: Visibility = Unspecified,
 ) {
 
     enum class RawType(
@@ -20,5 +22,7 @@ annotation class SealedObjectInstances(
         List(kotlin.collections.List::class, ::listOf),
         Set(kotlin.collections.Set::class, ::setOf),
     }
+
+    enum class Visibility { Unspecified, Public, Internal, Private }
 
 }

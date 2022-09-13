@@ -2,6 +2,7 @@ package fr.smarquis.sealed
 
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAnnotationsByType
+import com.google.devtools.ksp.getVisibility
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
@@ -10,6 +11,17 @@ import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.Modifier.SEALED
+import com.google.devtools.ksp.symbol.Visibility.INTERNAL
+import com.google.devtools.ksp.symbol.Visibility.JAVA_PACKAGE
+import com.google.devtools.ksp.symbol.Visibility.LOCAL
+import com.google.devtools.ksp.symbol.Visibility.PRIVATE
+import com.google.devtools.ksp.symbol.Visibility.PROTECTED
+import com.google.devtools.ksp.symbol.Visibility.PUBLIC
+import fr.smarquis.sealed.SealedObjectInstances.Visibility
+import fr.smarquis.sealed.SealedObjectInstances.Visibility.Internal
+import fr.smarquis.sealed.SealedObjectInstances.Visibility.Private
+import fr.smarquis.sealed.SealedObjectInstances.Visibility.Public
+import fr.smarquis.sealed.SealedObjectInstances.Visibility.Unspecified
 import java.io.OutputStreamWriter
 import kotlin.reflect.KClass
 
@@ -65,6 +77,9 @@ private class SealedObjectInstancesProcessor(
 
     @Suppress("UnusedReceiverParameter")
     private fun OutputStreamWriter.appendMethod(sealed: KSClassDeclaration, annotation: SealedObjectInstances) {
+        val visibility = sealed.getVisibility(annotation).also {
+            if (it == Private) environment.logger.error("Unsupported [private] visibility.", sealed)
+        }
         val sealedClassName = sealed.qualifiedName!!.asString()
         val methodName = annotation.name.takeUnless(String::isEmpty)
         val rawClassName = annotation.rawType.kClass.qualifiedName
@@ -77,8 +92,25 @@ private class SealedObjectInstancesProcessor(
         // language=kotlin
         """
         /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */
-        fun ${KClass::class.qualifiedName}<$sealedClassName>.$methodName(): $rawClassName<$sealedClassName> = $collectionBuilder
+        ${visibility.modifier()} fun ${KClass::class.qualifiedName}<$sealedClassName$genericReceiverType>.$methodName(): $rawClassName<$sealedClassName$genericReturnType> = $collectionBuilder
         """.trimIndent().let(::appendLine)
+    }
+
+    private fun KSClassDeclaration.getVisibility(
+        annotation: SealedObjectInstances,
+    ): Visibility = when (val visibility = annotation.visibility) {
+        Public, Internal, Private -> visibility
+        Unspecified -> when (getVisibility()) {
+            PUBLIC -> Public
+            PROTECTED, INTERNAL, LOCAL, JAVA_PACKAGE -> Internal
+            PRIVATE -> Private
+        }
+    }
+
+    private fun Visibility.modifier() = when (this) {
+        Unspecified, Public -> "public"
+        Internal -> "internal"
+        Private -> "private"
     }
 
 }
