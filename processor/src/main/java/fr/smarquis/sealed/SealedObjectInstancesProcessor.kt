@@ -11,6 +11,11 @@ import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.Modifier.SEALED
+import com.google.devtools.ksp.symbol.Variance
+import com.google.devtools.ksp.symbol.Variance.CONTRAVARIANT
+import com.google.devtools.ksp.symbol.Variance.COVARIANT
+import com.google.devtools.ksp.symbol.Variance.INVARIANT
+import com.google.devtools.ksp.symbol.Variance.STAR
 import com.google.devtools.ksp.symbol.Visibility.INTERNAL
 import com.google.devtools.ksp.symbol.Visibility.JAVA_PACKAGE
 import com.google.devtools.ksp.symbol.Visibility.LOCAL
@@ -80,6 +85,8 @@ private class SealedObjectInstancesProcessor(
         val visibility = sealed.getVisibility(annotation).also {
             if (it == Private) environment.logger.error("Unsupported [private] visibility.", sealed)
         }
+        val genericReceiverType = sealed.genericsReceiverTypes().orEmpty()
+        val genericReturnType = sealed.genericsReturnTypes().orEmpty()
         val sealedClassName = sealed.qualifiedName!!.asString()
         val methodName = annotation.name.takeUnless(String::isEmpty)
         val rawClassName = annotation.rawType.kClass.qualifiedName
@@ -112,5 +119,38 @@ private class SealedObjectInstancesProcessor(
         Internal -> "internal"
         Private -> "private"
     }
+
+    private fun KSClassDeclaration.generics(): List<Pair<Variance, String?>>? = typeParameters
+        .takeUnless { it.isEmpty() }
+        ?.map {
+            val bounds = it.bounds.toList()
+            when {
+                bounds.size > 1 -> TODO("Unsupported multi bounds type parameters!")
+                bounds.isEmpty() -> it.variance to null
+                else -> it.variance to bounds.single().resolve().declaration.qualifiedName!!.asString()
+            }
+        }
+
+    private fun KSClassDeclaration.genericsReceiverTypes(): String? = generics()
+        ?.joinToString(prefix = "<", separator = ", ", postfix = ">") { (variance, type) ->
+            if (type == null) "*"
+            else when (variance) {
+                INVARIANT -> "out $type"
+                COVARIANT -> type
+                CONTRAVARIANT -> "*"
+                STAR -> TODO("Unsupported STAR variance!")
+            }
+        }
+
+    private fun KSClassDeclaration.genericsReturnTypes(): String? = generics()
+        ?.joinToString(prefix = "<", separator = ", ", postfix = ">") { (variance, type) ->
+            if (type == null) "*"
+            else when (variance) {
+                INVARIANT -> "out $type"
+                COVARIANT -> type
+                CONTRAVARIANT -> "*"
+                STAR -> TODO("Unsupported STAR variance!")
+            }
+        }
 
 }
