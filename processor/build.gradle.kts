@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.ksp)
     `maven-publish`
+    alias(libs.plugins.binaryCompatibilityValidator)
 }
 
 repositories {

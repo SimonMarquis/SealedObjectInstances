@@ -1,0 +1,36 @@
+public final class fr/smarquis/sealed/SealedExtensionsKt {
+	public static final fun reflectSealedObjectInstances (Lkotlin/reflect/KClass;)Ljava/util/Set;
+}
+
+public abstract interface annotation class fr/smarquis/sealed/SealedObjectInstances : java/lang/annotation/Annotation {
+	public abstract fun name ()Ljava/lang/String;
+	public abstract fun rawType ()Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+	public abstract fun visibility ()Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+}
+
+public abstract interface annotation class fr/smarquis/sealed/SealedObjectInstances$Container : java/lang/annotation/Annotation {
+	public abstract fun value ()[Lfr/smarquis/sealed/SealedObjectInstances;
+}
+
+public final class fr/smarquis/sealed/SealedObjectInstances$RawType : java/lang/Enum {
+	public static final field Array Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+	public static final field List Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+	public static final field Set Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+	public static fun valueOf (Ljava/lang/String;)Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+	public static fun values ()[Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+}
+
+public final class fr/smarquis/sealed/SealedObjectInstances$Visibility : java/lang/Enum {
+	public static final field Internal Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+	public static final field Private Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+	public static final field Public Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+	public static final field Unspecified Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+	public static fun valueOf (Ljava/lang/String;)Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+	public static fun values ()[Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+}
+
+public final class fr/smarquis/sealed/SealedObjectInstancesProcessorProvider : com/google/devtools/ksp/processing/SymbolProcessorProvider {
+	public fun <init> ()V
+	public fun create (Lcom/google/devtools/ksp/processing/SymbolProcessorEnvironment;)Lcom/google/devtools/ksp/processing/SymbolProcessor;
+}
+
