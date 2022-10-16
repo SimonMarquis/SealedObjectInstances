@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.ksp)
-    `maven-publish`
     alias(libs.plugins.binaryCompatibilityValidator)
+    `maven-publish`
+    id("signing")
 }
 
 repositories {
@@ -91,4 +92,13 @@ publishing {
             }
         }
     }
+}
+
+/* https://docs.gradle.org/current/userguide/signing_plugin.html */
+signing {
+    isRequired = "publish" in gradle.startParameter.taskNames && !version.toString().endsWith("-SNAPSHOT")
+    val signingKey: String by project
+    val signingPassword: String by project
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign(publishing.publications)
 }
