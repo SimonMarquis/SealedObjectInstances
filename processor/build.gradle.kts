@@ -40,6 +40,14 @@ publishing {
         mavenLocal {
             url = uri(rootProject.layout.buildDirectory.dir(".m2/repository"))
         }
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/SimonMarquis/SealedObjectInstances")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
     publications {
         create<MavenPublication>("SealedObjectInstances") {
