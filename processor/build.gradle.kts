@@ -42,7 +42,7 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("jitpack") {
+        create<MavenPublication>("SealedObjectInstances") {
             artifactId = "SealedObjectInstances"
             from(components["kotlin"])
             pom {
