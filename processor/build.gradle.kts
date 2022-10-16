@@ -35,6 +35,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
+java {
+    withSourcesJar()
+}
+
 publishing {
     repositories {
         mavenLocal {
@@ -64,6 +68,7 @@ publishing {
         create<MavenPublication>("SealedObjectInstances") {
             artifactId = project.property("artifactId") as String
             from(components["kotlin"])
+            artifact(tasks["sourcesJar"])
             pom {
                 name.set("SealedObjectInstances")
                 description.set("A Kotlin Symbol Processor to list sealed object instances.")
