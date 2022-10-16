@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.ksp)
     `maven-publish`
+    id("signing")
     alias(libs.plugins.binaryCompatibilityValidator)
 }
 
@@ -35,16 +36,42 @@ tasks.test {
     useJUnitPlatform()
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 publishing {
     repositories {
         mavenLocal {
             url = uri(rootProject.layout.buildDirectory.dir(".m2/repository"))
         }
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/SimonMarquis/SealedObjectInstances")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+        maven {
+            name = "OSSRH"
+            url = when (version.toString().endsWith("-SNAPSHOT")) {
+                true -> "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                false -> "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            }.let(::uri)
+            credentials {
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_TOKEN")
+            }
+        }
     }
     publications {
-        create<MavenPublication>("jitpack") {
-            artifactId = "SealedObjectInstances"
+        create<MavenPublication>("SealedObjectInstances") {
+            artifactId = project.property("artifactId") as String
             from(components["kotlin"])
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
             pom {
                 name.set("SealedObjectInstances")
                 description.set("A Kotlin Symbol Processor to list sealed object instances.")
@@ -67,4 +94,13 @@ publishing {
             }
         }
     }
+}
+
+/* https://docs.gradle.org/current/userguide/signing_plugin.html */
+signing {
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    if (signingKey == null || signingPassword == null) return@signing
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign(publishing.publications)
 }
