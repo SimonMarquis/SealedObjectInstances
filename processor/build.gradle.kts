@@ -97,8 +97,8 @@ publishing {
 /* https://docs.gradle.org/current/userguide/signing_plugin.html */
 signing {
     isRequired = "publish" in gradle.startParameter.taskNames && !version.toString().endsWith("-SNAPSHOT")
-    val signingKey: String by project
-    val signingPassword: String by project
+    val signingKey: String? by project
+    val signingPassword: String? by project
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
 }
