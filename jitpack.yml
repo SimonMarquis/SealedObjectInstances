@@ -1,4 +1,4 @@
 jdk:
   - openjdk11
 install:
-  - ./gradlew clean -xtest :processor:assemble publishToMavenLocal -Pgroup=com.github.SimonMarquis
+  - ./gradlew clean -xtest :processor:assemble publishToMavenLocal -Pgroup=com.github.SimonMarquis -PartifactId=SealedObjectInstances

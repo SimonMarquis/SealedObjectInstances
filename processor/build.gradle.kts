@@ -51,7 +51,7 @@ publishing {
     }
     publications {
         create<MavenPublication>("SealedObjectInstances") {
-            artifactId = "SealedObjectInstances"
+            artifactId = project.property("artifactId") as String
             from(components["kotlin"])
             pom {
                 name.set("SealedObjectInstances")
