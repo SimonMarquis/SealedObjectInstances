@@ -48,6 +48,17 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
+        maven {
+            name = "OSSRH"
+            url = when (version.toString().endsWith("-SNAPSHOT")) {
+                true -> "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                false -> "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            }.let(::uri)
+            credentials {
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_TOKEN")
+            }
+        }
     }
     publications {
         create<MavenPublication>("SealedObjectInstances") {

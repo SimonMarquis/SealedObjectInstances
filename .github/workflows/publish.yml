@@ -1,4 +1,4 @@
-name: Publish to GitHub Packages
+name: Publish to GitHub Packages & OSSRH
 
 on:
   workflow_dispatch:
@@ -24,3 +24,10 @@ jobs:
           arguments: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
+      - name: Upload Maven artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: maven
+          path: build/.m2/repository
