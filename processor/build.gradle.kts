@@ -68,7 +68,6 @@ publishing {
                 name.set("SealedObjectInstances")
                 description.set("A Kotlin Symbol Processor to list sealed object instances.")
                 url.set("https://github.com/SimonMarquis/SealedObjectInstances")
-                packaging = "aar"
                 licenses {
                     license {
                         name.set("Apache-2.0 license")
