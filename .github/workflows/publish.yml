@@ -1,7 +1,6 @@
-name: Publish to GitHub Packages & OSSRH
+name: Publish on releases
 
 on:
-  workflow_dispatch:
   release:
     types: [created]
 
