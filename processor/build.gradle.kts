@@ -104,3 +104,7 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
 }
+
+tasks.withType<Sign>().configureEach {
+    notCompatibleWithConfigurationCache("https://github.com/gradle/gradle/issues/13470")
+}
