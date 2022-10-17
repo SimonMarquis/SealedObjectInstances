@@ -1,4 +1,4 @@
-# Sealed Object Instances [![Status](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml/badge.svg)](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml) [![](https://jitpack.io/v/SimonMarquis/SealedObjectInstances.svg)](https://jitpack.io/#SimonMarquis/SealedObjectInstances)
+# Sealed Object Instances [![Status](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml/badge.svg)](https://github.com/SimonMarquis/SealedObjectInstances/actions/workflows/build.yml)
 
 
 > A **K**otlin **S**ymbol **P**rocessor to list sealed object instances.
@@ -60,7 +60,7 @@ plugins {
 }
 ```
 
-And add the library to the list of dependencies:
+Then add the library dependencies: ![Maven Central](https://img.shields.io/maven-central/v/fr.smarquis.sealed/sealed-object-instances)
 
 ```kotlin
 dependencies {
@@ -70,6 +70,9 @@ dependencies {
 ```
 
 <details><summary>🐙 GitHub Packages</summary>
+
+
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/SimonMarquis/SealedObjectInstances)](https://github.com/SimonMarquis/SealedObjectInstances/packages/1674974/versions)
 
 > **Note**
 > You'll need to create a personal access token (PAT) with the `read:packages` permission to be able to download from this repository.
@@ -92,11 +95,12 @@ dependencies {
 }
 ```
 
-[Browse versions](https://github.com/SimonMarquis/SealedObjectInstances/packages)
-
 </details>
 
 <details><summary>🚀 JitPack.io</summary>
+
+
+[![JitPack.io](https://jitpack.io/v/SimonMarquis/SealedObjectInstances.svg)](https://jitpack.io/#SimonMarquis/SealedObjectInstances)
 
 ```kotlin
 repositories {
@@ -110,8 +114,6 @@ dependencies {
     ksp("com.github.SimonMarquis:SealedObjectInstances:<latest-version>")
 }
 ```
-
-[Browse versions](https://jitpack.io/#SimonMarquis/SealedObjectInstances)
 
 </details>
 
