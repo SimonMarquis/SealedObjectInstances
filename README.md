@@ -52,13 +52,53 @@ val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 
 ## Setup
 
-In the module's build script, apply the `com.google.devtools.ksp` plugin with the current Kotlin version and add this library to the list of dependencies.
+In the module's build script, apply the `com.google.devtools.ksp` plugin with the current Kotlin version:
 
 ```kotlin
 plugins {
     id("com.google.devtools.ksp") version "1.7.20-1.0.6"
 }
+```
 
+And add the library to the list of dependencies:
+
+```kotlin
+dependencies {
+    implementation("fr.smarquis.sealed:sealed-object-instances:<latest-version>")
+    ksp("fr.smarquis.sealed:sealed-object-instances:<latest-version>")
+}
+```
+
+<details><summary>🐙 GitHub Packages</summary>
+
+> **Note**
+> You'll need to create a personal access token (PAT) with the `read:packages` permission to be able to download from this repository.
+> https://docs.github.com/en/packages/learn-github-packages
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/SimonMarquis/SealedObjectInstances")
+        credentials {
+            username = System.getenv("GITHUB_USERNAME")
+            password = System.getenv("GITHUB_PACKAGES_READ_TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation("fr.smarquis.sealed:sealed-object-instances:<latest-version>")
+    ksp("fr.smarquis.sealed:sealed-object-instances:<latest-version>")
+}
+```
+
+[Browse versions](https://github.com/SimonMarquis/SealedObjectInstances/packages)
+
+</details>
+
+<details><summary>🚀 JitPack.io</summary>
+
+```kotlin
 repositories {
     maven {
         url = uri("https://jitpack.io")
@@ -70,6 +110,10 @@ dependencies {
     ksp("com.github.SimonMarquis:SealedObjectInstances:<latest-version>")
 }
 ```
+
+[Browse versions](https://jitpack.io/#SimonMarquis/SealedObjectInstances)
+
+</details>
 
 ## Make IDE aware of generated code
 
