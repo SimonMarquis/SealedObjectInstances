@@ -46,6 +46,7 @@ java {
 
 val dokkaHtml by tasks.getting(DokkaTask::class) {
     moduleName.set("SealedObjectInstances")
+    outputDirectory.set(rootProject.layout.buildDirectory.dir("dokka").get().asFile)
 }
 
 val javadocJar = tasks.named<Jar>("javadocJar") {
