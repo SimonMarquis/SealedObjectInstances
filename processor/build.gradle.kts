@@ -1,7 +1,10 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.ksp)
     alias(libs.plugins.binaryCompatibilityValidator)
+    alias(libs.plugins.dokka)
     `maven-publish`
     signing
 }
@@ -41,6 +44,14 @@ java {
     withJavadocJar()
 }
 
+val dokkaHtml by tasks.getting(DokkaTask::class) {
+    moduleName.set("SealedObjectInstances")
+}
+
+val javadocJar = tasks.named<Jar>("javadocJar") {
+    from(tasks.named("dokkaJavadoc"))
+}
+
 publishing {
     repositories {
         mavenLocal {
@@ -71,7 +82,7 @@ publishing {
             artifactId = project.property("artifactId") as String
             from(components["kotlin"])
             artifact(tasks["sourcesJar"])
-            artifact(tasks["javadocJar"])
+            artifact(javadocJar)
             pom {
                 name.set("SealedObjectInstances")
                 description.set("A Kotlin Symbol Processor to list sealed object instances.")
@@ -107,4 +118,7 @@ signing {
 
 tasks.withType<Sign>().configureEach {
     notCompatibleWithConfigurationCache("https://github.com/gradle/gradle/issues/13470")
+}
+tasks.dokkaHtml {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
 }
