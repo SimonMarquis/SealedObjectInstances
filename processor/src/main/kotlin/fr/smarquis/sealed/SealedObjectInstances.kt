@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KFunction1
 
 /**
- * This repeatable annotation is the main entry point to configure the generated sealed class extensions.
+ * This repeatable annotation is the main entry point to configure the generated extensions.
  */
 @Repeatable
 @Target(AnnotationTarget.CLASS)
