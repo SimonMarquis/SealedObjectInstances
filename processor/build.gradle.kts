@@ -115,6 +115,7 @@ signing {
     if (signingKey == null || signingPassword == null) return@signing
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
+    isRequired = true
 }
 
 tasks.withType<Sign>().configureEach {
