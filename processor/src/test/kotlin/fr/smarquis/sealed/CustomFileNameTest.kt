@@ -8,6 +8,7 @@ import com.tschuchort.compiletesting.symbolProcessorProviders
 import fr.smarquis.sealed.SealedObjectInstances.RawType.Array
 import fr.smarquis.sealed.SealedObjectInstances.RawType.List
 import org.junit.jupiter.api.Test
+import java.io.File.separator
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -55,12 +56,12 @@ class CustomFileNameTest {
         assertEquals(ExitCode.OK, result.exitCode)
         /* $sealedObjectInstances.kt */
         assertTrue("${'$'}sealedObjectInstances.kt source file is generated") {
-            """ksp\sources\kotlin\CustomFileNameSealedClass${'$'}sealedObjectInstances.kt""" in result.messages
+            """ksp${separator}sources${separator}kotlin${separator}CustomFileNameSealedClass${'$'}sealedObjectInstances.kt""" in result.messages
         }
         result.generatedFiles.single { it.name == "CustomFileNameSealedClass_sealedObjectInstancesKt.class" }
         /* custom_file_name.kt */
         assertTrue("custom_file_name.kt source file is generated") {
-            """ksp\sources\kotlin\custom_file_name.kt""" in result.messages
+            """ksp${separator}sources${separator}kotlin${separator}custom_file_name.kt""" in result.messages
         }
         result.generatedFiles.single { it.name == "Custom_file_nameKt.class" }
 
