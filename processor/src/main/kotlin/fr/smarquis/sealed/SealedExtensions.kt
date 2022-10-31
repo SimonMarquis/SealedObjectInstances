@@ -20,7 +20,10 @@ private tailrec fun KSClassDeclaration.recursiveSealedObjectInstances(
 //endregion
 
 //region Reflect
-fun <T : Any> KClass<T>.reflectSealedObjectInstances() = recursiveSealedObjectInstances()
+/**
+ * @return the [Set] of [T] instances through reflection.
+ */
+fun <T : Any> KClass<T>.reflectSealedObjectInstances(): Set<T> = recursiveSealedObjectInstances()
 
 private tailrec fun <T : Any> KClass<T>.recursiveSealedObjectInstances(
     sealedSubclasses: List<KClass<out T>> = listOf(this),
