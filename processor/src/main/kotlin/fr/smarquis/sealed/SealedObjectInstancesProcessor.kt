@@ -48,14 +48,17 @@ private class SealedObjectInstancesProcessor(
         return emptyList()
     }
 
-    private fun process(declaration: KSClassDeclaration) {
-        declaration.createNewFile().writer().use {
-            it.appendHeader(declaration)
-            declaration.annotations().forEach { annotation ->
-                it.appendMethod(declaration, annotation)
+    private fun process(declaration: KSClassDeclaration) = declaration.annotations()
+        .groupBy { it.fileName.takeUnless(String::isBlank) }
+        .mapKeys { declaration.createNewFile(it.key) }
+        .forEach { (file, annotations) ->
+            file.writer().use {
+                it.appendHeader(declaration)
+                annotations.forEach { annotation ->
+                    it.appendMethod(declaration, annotation)
+                }
             }
         }
-    }
 
     @OptIn(KspExperimental::class)
     private fun KSClassDeclaration.annotations() = getAnnotationsByType(SealedObjectInstances::class).toList().also {
@@ -66,13 +69,13 @@ private class SealedObjectInstancesProcessor(
         )
     }
 
-    private fun KSClassDeclaration.createNewFile() = environment.codeGenerator.createNewFile(
+    private fun KSClassDeclaration.createNewFile(fileName: String?) = environment.codeGenerator.createNewFile(
         dependencies = Dependencies(
             aggregating = true,
             sources = sealedObjectInstances().map { it.containingFile!! }.plus(containingFile!!).toTypedArray()
         ),
         packageName = containingFile!!.packageName.asString(),
-        fileName = "${simpleName.asString()}\$sealedObjectInstances"
+        fileName = fileName ?: "${simpleName.asString()}\$sealedObjectInstances"
     )
 
     private fun OutputStreamWriter.appendHeader(klass: KSClassDeclaration) = apply {

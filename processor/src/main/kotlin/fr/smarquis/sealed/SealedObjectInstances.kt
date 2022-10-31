@@ -12,6 +12,7 @@ annotation class SealedObjectInstances(
     val name: String = "sealedObjectInstances",
     val rawType: RawType = Set,
     val visibility: Visibility = Unspecified,
+    val fileName: String = "",
 ) {
 
     enum class RawType(

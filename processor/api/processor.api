@@ -3,6 +3,7 @@ public final class fr/smarquis/sealed/SealedExtensionsKt {
 }
 
 public abstract interface annotation class fr/smarquis/sealed/SealedObjectInstances : java/lang/annotation/Annotation {
+	public abstract fun fileName ()Ljava/lang/String;
 	public abstract fun name ()Ljava/lang/String;
 	public abstract fun rawType ()Lfr/smarquis/sealed/SealedObjectInstances$RawType;
 	public abstract fun visibility ()Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
