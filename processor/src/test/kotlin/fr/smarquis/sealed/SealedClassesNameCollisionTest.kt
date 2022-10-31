@@ -45,6 +45,9 @@ class SealedClassesNameCollisionTest {
         assertTrue("FileAlreadyExistsException is printed") {
             "e: [ksp] kotlin.io.FileAlreadyExistsException:" in result.messages
         }
+        assertTrue("Custom error message is printed") {
+            "Duplicated file detected! You can override the generated file name with @SealedObjectInstances(fileName=\"…\")" in result.messages
+        }
     }
 
 }

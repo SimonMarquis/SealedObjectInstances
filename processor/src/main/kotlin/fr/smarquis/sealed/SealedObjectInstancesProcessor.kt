@@ -29,6 +29,7 @@ import fr.smarquis.sealed.SealedObjectInstances.Visibility.Public
 import fr.smarquis.sealed.SealedObjectInstances.Visibility.Unspecified
 import java.io.OutputStreamWriter
 import kotlin.reflect.KClass
+import kotlin.text.Typography.ellipsis
 
 
 class SealedObjectInstancesProcessorProvider : SymbolProcessorProvider {
@@ -69,14 +70,23 @@ private class SealedObjectInstancesProcessor(
         )
     }
 
-    private fun KSClassDeclaration.createNewFile(fileName: String?) = environment.codeGenerator.createNewFile(
-        dependencies = Dependencies(
-            aggregating = true,
-            sources = sealedObjectInstances().map { it.containingFile!! }.plus(containingFile!!).toTypedArray()
-        ),
-        packageName = containingFile!!.packageName.asString(),
-        fileName = fileName ?: "${simpleName.asString()}\$sealedObjectInstances"
-    )
+    private fun KSClassDeclaration.createNewFile(fileName: String?) = runCatching {
+        environment.codeGenerator.createNewFile(
+            dependencies = Dependencies(
+                aggregating = true,
+                sources = sealedObjectInstances().map { it.containingFile!! }.plus(containingFile!!).toTypedArray()
+            ),
+            packageName = containingFile!!.packageName.asString(),
+            fileName = fileName ?: "${simpleName.asString()}\$sealedObjectInstances"
+        )
+    }.onFailure {
+        when (it) {
+            is FileAlreadyExistsException -> environment.logger.error(
+                message = "Duplicated file detected! You can override the generated file name with @${SealedObjectInstances::class.simpleName}(${SealedObjectInstances::fileName.name}=\"$ellipsis\")",
+                symbol = this
+            )
+        }
+    }.getOrThrow()
 
     private fun OutputStreamWriter.appendHeader(klass: KSClassDeclaration) = apply {
         val packageName = klass.containingFile!!.packageName.asString()
