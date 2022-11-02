@@ -8,6 +8,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '11', '17', '18' ]
     permissions:
       contents: read
       packages: write
@@ -16,7 +19,7 @@ jobs:
       - name: set up JDK 11
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: ${{ matrix.java }}
           distribution: 'temurin'
       - name: Publish to MavenLocal
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
