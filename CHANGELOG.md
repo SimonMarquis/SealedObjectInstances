@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [1.5.0]
+
+_2022-11-02_
+
+- Add a `fileName` parameter to `SealedObjectInstances` annotation
+- Migrate default javadoc to Dokka
+
 ## [1.4.0]
 
 _2022-09-30_
@@ -34,7 +41,8 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.4.0...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.5.0...HEAD
+[1.5.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.5.0
 [1.4.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.4.0
 [1.3.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.3.0
 [1.2.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.2.0
