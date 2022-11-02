@@ -1,0 +1,42 @@
+name: 🐛 Gradle signing
+
+on:
+  push:
+    branches:
+      - "bug/gradle-sign-github-actions"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      - name: Publish to MavenLocal
+        uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
+        with:
+          arguments: publishAllPublicationsToMavenLocalRepository --info
+        env:
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
+      - name: Upload Maven artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: maven
+          path: build/.m2/repository
+      - name: Print maven repository content
+        run: |
+         ls -Rl build/.m2/repository/fr/smarquis/sealed/sealed-object-instances/ >> ls.txt
+         ( \
+           echo '# Artifacts' ;\
+           echo '' ;\
+           echo '```bash' ;\
+           cat ls.txt ;\
+           echo '```' ;\
+         ) >> $GITHUB_STEP_SUMMARY

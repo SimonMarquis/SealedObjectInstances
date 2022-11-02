@@ -113,6 +113,7 @@ signing {
     val signingKey: String? by project
     val signingPassword: String? by project
     if (signingKey == null || signingPassword == null) return@signing
+    logger.lifecycle("Signing ${publishing.publications}...")
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
     isRequired = true
