@@ -23,6 +23,7 @@ jobs:
         with:
           arguments: publishAllPublicationsToMavenLocalRepository --info
         env:
+          ORG_GRADLE_PROJECT_version: 1
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
       - name: Upload Maven artifact
