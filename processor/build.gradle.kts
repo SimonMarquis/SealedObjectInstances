@@ -55,7 +55,8 @@ val javadocJar = tasks.named<Jar>("javadocJar") {
 
 publishing {
     repositories {
-        mavenLocal {
+        maven {
+            name = "MavenLocal"
             url = uri(rootProject.layout.buildDirectory.dir(".m2/repository"))
         }
         maven {
