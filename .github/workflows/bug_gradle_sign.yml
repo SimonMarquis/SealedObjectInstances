@@ -21,6 +21,14 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
+      - name: Build
+        uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
+        with:
+          arguments: assemble signSealedObjectInstancesPublication
+        env:
+          ORG_GRADLE_PROJECT_version: 1
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
       - name: Publish to MavenLocal
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
