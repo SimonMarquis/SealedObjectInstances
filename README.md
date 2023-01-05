@@ -123,10 +123,10 @@ By default, IntelliJ IDEA or other IDEs don't know about the generated code. So 
 
 - Android project
   ```kotlin
-  androidComponents.onVariants {
-      kotlin.sourceSets.findByName(it.name)?.kotlin?.srcDirs(
-          file("$buildDir/generated/ksp/${it.name}/kotlin")
-      )
+  androidComponents.beforeVariants {
+    kotlin.sourceSets.register(it.name) {
+        kotlin.srcDir(file("$buildDir/generated/ksp/${it.name}/kotlin"))
+    }
   }
   ```
 - Kotlin JVM project
