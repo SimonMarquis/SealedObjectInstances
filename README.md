@@ -56,7 +56,7 @@ In the module's build script, apply the `com.google.devtools.ksp` plugin with th
 
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "1.7.20-1.0.6"
+    id("com.google.devtools.ksp") version "1.8.0-1.0.8"
 }
 ```
 

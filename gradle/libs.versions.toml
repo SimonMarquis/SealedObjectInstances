@@ -1,8 +1,8 @@
 [versions]
 junit = "5.9.0"
 dokka = "1.7.20"
-kotlin = "1.7.20"
-ksp = "1.7.20-1.0.6"
+kotlin = "1.8.0"
+ksp = "1.8.0-1.0.8"
 
 [libraries]
 junitApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
