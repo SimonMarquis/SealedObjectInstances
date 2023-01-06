@@ -44,7 +44,19 @@ java {
     withJavadocJar()
 }
 
+tasks.dokkaJavadoc {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+}
+tasks.dokkaHtml {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+}
+
+tasks.withType<DokkaTask> {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+}
+
 val dokkaHtml by tasks.getting(DokkaTask::class) {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
     moduleName.set("SealedObjectInstances")
     outputDirectory.set(rootProject.layout.buildDirectory.dir("dokka").get().asFile)
 }
@@ -118,11 +130,4 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
     isRequired = true
-}
-
-tasks.withType<Sign>().configureEach {
-    notCompatibleWithConfigurationCache("https://github.com/gradle/gradle/issues/13470")
-}
-tasks.dokkaHtml {
-    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
 }

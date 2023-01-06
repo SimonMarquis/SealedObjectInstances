@@ -3,7 +3,7 @@ name: 🐛 Gradle signing
 on:
   push:
     branches:
-      - "bug/gradle-sign-github-actions"
+      - "bug/gradle-sign-github-actions-3"
 
 jobs:
   publish:
