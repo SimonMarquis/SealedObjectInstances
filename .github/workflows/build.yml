@@ -13,10 +13,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
       - name: Build
-        run: ./gradlew build --stacktrace
+        uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
+        with:
+          arguments: build --stacktrace
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
@@ -28,7 +28,9 @@ jobs:
           name: test-reports
           path: processor/build/reports/tests/test
       - name: Build Maven artifact
-        run: ./gradlew publishAllPublicationsToMavenLocalRepository --stacktrace
+        uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
+        with:
+          arguments: publishAllPublicationsToMavenLocalRepository --stacktrace
       - name: Upload Maven artifact
         uses: actions/upload-artifact@v3
         with:
