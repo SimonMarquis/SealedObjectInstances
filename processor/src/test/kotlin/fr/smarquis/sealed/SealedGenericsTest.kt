@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 
+@Suppress("USELESS_CAST")
 class SealedGenericsTest {
 
     @SealedObjectInstances
@@ -14,7 +15,7 @@ class SealedGenericsTest {
     @Test
     fun `generic with one parameter`() = assertEquals(
         expected = setOf(SealedSingleGeneric.INSTANCE),
-        actual = SealedSingleGeneric::class.sealedObjectInstances(),
+        actual = SealedSingleGeneric::class.sealedObjectInstances() as Set<SealedSingleGeneric<out Any>>,
     )
 
     @SealedObjectInstances
@@ -25,7 +26,7 @@ class SealedGenericsTest {
     @Test
     fun `generic with multiple parameters`() = assertEquals(
         expected = setOf(SealedMultipleGenerics.INSTANCE),
-        actual = SealedMultipleGenerics::class.sealedObjectInstances(),
+        actual = SealedMultipleGenerics::class.sealedObjectInstances() as Set<SealedMultipleGenerics<out Any, out Any, out Any>>,
     )
 
     @SealedObjectInstances
@@ -80,7 +81,7 @@ class SealedGenericsTest {
     @Test
     fun `generic bounded with one parameter`() = assertEquals(
         expected = setOf(SealedBoundedSingleGeneric.INSTANCE),
-        actual = SealedBoundedSingleGeneric::class.sealedObjectInstances(),
+        actual = SealedBoundedSingleGeneric::class.sealedObjectInstances() as Set<SealedBoundedSingleGeneric<out Exception>>,
     )
 
     @SealedObjectInstances
@@ -91,7 +92,7 @@ class SealedGenericsTest {
     @Test
     fun `generic bounded with multiple parameters`() = assertEquals(
         expected = setOf(SealedBoundedMultipleGeneric.INSTANCE),
-        actual = SealedBoundedMultipleGeneric::class.sealedObjectInstances(),
+        actual = SealedBoundedMultipleGeneric::class.sealedObjectInstances() as Set<SealedBoundedMultipleGeneric<out Any, out Exception, out Number>>,
     )
 
     @SealedObjectInstances
@@ -102,7 +103,7 @@ class SealedGenericsTest {
     @Test
     fun `generic bounded covariant`() = assertEquals(
         expected = setOf(SealedBoundedCovariantGeneric.INSTANCE),
-        actual = SealedBoundedCovariantGeneric::class.sealedObjectInstances(),
+        actual = SealedBoundedCovariantGeneric::class.sealedObjectInstances() as Set<SealedBoundedCovariantGeneric<Exception>>,
     )
 
     @SealedObjectInstances
@@ -113,7 +114,7 @@ class SealedGenericsTest {
     @Test
     fun `generic bounded contravariant`() = assertEquals(
         expected = setOf(SealedBoundedContravariantGeneric.INSTANCE),
-        actual = SealedBoundedContravariantGeneric::class.sealedObjectInstances(),
+        actual = SealedBoundedContravariantGeneric::class.sealedObjectInstances() as Set<SealedBoundedContravariantGeneric<*>>,
     )
 
 }

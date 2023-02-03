@@ -145,15 +145,7 @@ private class SealedObjectInstancesProcessor(
         }
 
     private fun KSClassDeclaration.genericsReceiverTypes(): String? = generics()
-        ?.joinToString(prefix = "<", separator = ", ", postfix = ">") { (variance, type) ->
-            if (type == null) "*"
-            else when (variance) {
-                INVARIANT -> "out $type"
-                COVARIANT -> type
-                CONTRAVARIANT -> "*"
-                STAR -> TODO("Unsupported STAR variance!")
-            }
-        }
+        ?.joinToString(prefix = "<", separator = ", ", postfix = ">") { "*" }
 
     private fun KSClassDeclaration.genericsReturnTypes(): String? = generics()
         ?.joinToString(prefix = "<", separator = ", ", postfix = ">") { (variance, type) ->
