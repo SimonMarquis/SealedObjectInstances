@@ -6,6 +6,7 @@ public abstract interface annotation class fr/smarquis/sealed/SealedObjectInstan
 	public abstract fun fileName ()Ljava/lang/String;
 	public abstract fun name ()Ljava/lang/String;
 	public abstract fun rawType ()Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+	public abstract fun returnType ()Z
 	public abstract fun visibility ()Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
 }
 
