@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.ksp)
@@ -13,6 +15,12 @@ kotlin {
     }
     sourceSets.test {
         kotlin.srcDir("build/generated/ksp/test/kotlin")
+    }
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        allWarningsAsErrors = true
     }
 }
 

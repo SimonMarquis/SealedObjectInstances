@@ -1,4 +1,5 @@
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.jvm)
@@ -32,6 +33,12 @@ kotlin {
     }
     sourceSets.test {
         kotlin.srcDir("build/generated/ksp/test/kotlin")
+    }
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        allWarningsAsErrors = true
     }
 }
 
