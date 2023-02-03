@@ -79,8 +79,8 @@ class SealedGenericsTest {
 
     @Test
     fun `generic bounded covariant`() = assertEquals(
-        expected = setOf(SealedCovariantGeneric.INSTANCE),
-        actual = SealedCovariantGeneric::class.sealedObjectInstances(),
+        expected = setOf(SealedBoundedCovariantGeneric.INSTANCE),
+        actual = SealedBoundedCovariantGeneric::class.sealedObjectInstances(),
     )
 
     @SealedObjectInstances
