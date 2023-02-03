@@ -12,8 +12,6 @@ plugins {
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(11))
-    withSourcesJar()
-    withJavadocJar()
 }
 
 kotlin {
@@ -36,17 +34,29 @@ tasks.test {
     useJUnitPlatform()
 }
 
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
 val dokkaHtml by tasks.getting(DokkaTask::class) {
     moduleName.set("SealedObjectInstances")
     outputDirectory.set(rootProject.layout.buildDirectory.dir("dokka").get().asFile)
 }
 
-val javadocJar = tasks.named<Jar>("javadocJar") {
-    from(tasks.named("dokkaJavadoc"))
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+    from(dokkaHtml.outputDirectory)
 }
 
-tasks.dokkaHtml {
-    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+artifacts {
+    archives(sourcesJar)
+    archives(javadocJar)
 }
 
 publishing {
@@ -77,9 +87,7 @@ publishing {
     publications {
         register<MavenPublication>("SealedObjectInstances") {
             artifactId = project.property("artifactId") as String
-            from(components["kotlin"])
-            artifact(tasks["sourcesJar"])
-            artifact(javadocJar)
+            from(components["java"])
             pom {
                 name.set("SealedObjectInstances")
                 description.set("A Kotlin Symbol Processor to list sealed object instances.")
@@ -116,6 +124,10 @@ signing {
 
 tasks.withType<Sign>().configureEach {
     notCompatibleWithConfigurationCache("https://github.com/gradle/gradle/issues/13470")
+}
+
+tasks.withType<DokkaTask> {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
 }
 
 repositories {
