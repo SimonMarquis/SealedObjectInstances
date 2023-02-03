@@ -10,24 +10,14 @@ plugins {
     signing
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation(libs.kspApi)
-    implementation(libs.kotlinReflect)
-    kspTest(projects.processor)
-    testImplementation(libs.kotlinTest)
-    testImplementation(libs.junitApi)
-    testRuntimeOnly(libs.junitRuntime)
-    testImplementation(libs.kotlinCompileTestingKsp)
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+    withSourcesJar()
+    withJavadocJar()
 }
 
 kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
-    }
+    jvmToolchain(11)
     sourceSets.main {
         kotlin.srcDir("build/generated/ksp/main/kotlin")
     }
@@ -46,11 +36,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
-
 val dokkaHtml by tasks.getting(DokkaTask::class) {
     moduleName.set("SealedObjectInstances")
     outputDirectory.set(rootProject.layout.buildDirectory.dir("dokka").get().asFile)
@@ -58,6 +43,10 @@ val dokkaHtml by tasks.getting(DokkaTask::class) {
 
 val javadocJar = tasks.named<Jar>("javadocJar") {
     from(tasks.named("dokkaJavadoc"))
+}
+
+tasks.dokkaHtml {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
 }
 
 publishing {
@@ -128,6 +117,17 @@ signing {
 tasks.withType<Sign>().configureEach {
     notCompatibleWithConfigurationCache("https://github.com/gradle/gradle/issues/13470")
 }
-tasks.dokkaHtml {
-    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(libs.kspApi)
+    implementation(libs.kotlinReflect)
+    kspTest(projects.processor)
+    testImplementation(libs.kotlinTest)
+    testImplementation(libs.junitApi)
+    testRuntimeOnly(libs.junitRuntime)
+    testImplementation(libs.kotlinCompileTestingKsp)
 }
