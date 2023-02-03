@@ -28,6 +28,10 @@ annotation class SealedObjectInstances(
      * The file name for the generated method. The default filename (when blank) will be the sealed class name with `$sealedObjectInstances` postfix.
      */
     val fileName: String = "",
+    /**
+     * Add return type to the generated method.
+     */
+    val returnType: Boolean = true,
 ) {
 
     enum class RawType(

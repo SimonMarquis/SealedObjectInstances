@@ -93,16 +93,17 @@ private class SealedObjectInstancesProcessor(
         if (packageName.isNotBlank()) appendLine("package $packageName\n")
     }
 
-    @Suppress("UnusedReceiverParameter")
     private fun OutputStreamWriter.appendMethod(sealed: KSClassDeclaration, annotation: SealedObjectInstances) {
         val visibility = sealed.getVisibility(annotation).also {
             if (it == Private) environment.logger.error("Unsupported [private] visibility.", sealed)
         }
-        val genericReceiverType = sealed.genericsReceiverTypes().orEmpty()
-        val genericReturnType = sealed.genericsReturnTypes().orEmpty()
         val sealedClassName = sealed.qualifiedName!!.asString()
+        val genericReceiverType = sealed.genericsReceiverTypes().orEmpty()
+        val receiverType = "${KClass::class.qualifiedName}<$sealedClassName$genericReceiverType>"
         val methodName = annotation.name.takeUnless(String::isEmpty)
         val rawClassName = annotation.rawType.kClass.qualifiedName
+        val genericReturnType = sealed.genericsReturnTypes().orEmpty()
+        val returnType = if (annotation.returnType) ": $rawClassName<$sealedClassName$genericReturnType>" else ""
         val collectionBuilder = sealed.sealedObjectInstances().joinToString(
             prefix = annotation.rawType.builder.name + "(",
             separator = ", ",
@@ -112,7 +113,7 @@ private class SealedObjectInstancesProcessor(
         // language=kotlin
         """
         /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */
-        ${visibility.modifier()} fun ${KClass::class.qualifiedName}<$sealedClassName$genericReceiverType>.$methodName(): $rawClassName<$sealedClassName$genericReturnType> = $collectionBuilder
+        ${visibility.modifier()} fun $receiverType.$methodName()$returnType = $collectionBuilder
         """.trimIndent().let(::appendLine)
     }
 
