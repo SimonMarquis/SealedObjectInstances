@@ -40,6 +40,17 @@ class SealedGenericsTest {
     )
 
     @SealedObjectInstances
+    sealed class SealedCovariantBoundedGeneric<out T : Number> {
+        object INSTANCE : SealedCovariantBoundedGeneric<Long>()
+    }
+
+    @Test
+    fun `generic covariant with bounded`() = assertEquals(
+        expected = setOf(SealedCovariantBoundedGeneric.INSTANCE),
+        actual = SealedCovariantBoundedGeneric::class.sealedObjectInstances(),
+    )
+
+    @SealedObjectInstances
     sealed class SealedContravariantGeneric<in T> {
         object INSTANCE : SealedContravariantGeneric<String>()
     }
@@ -48,6 +59,17 @@ class SealedGenericsTest {
     fun `generic contravariant`() = assertEquals(
         expected = setOf(SealedContravariantGeneric.INSTANCE),
         actual = SealedContravariantGeneric::class.sealedObjectInstances(),
+    )
+
+    @SealedObjectInstances
+    sealed class SealedContravariantBoundedGeneric<in T : Number> {
+        object INSTANCE : SealedContravariantBoundedGeneric<Long>()
+    }
+
+    @Test
+    fun `generic contravariant bounded`() = assertEquals(
+        expected = setOf(SealedContravariantBoundedGeneric.INSTANCE),
+        actual = SealedContravariantBoundedGeneric::class.sealedObjectInstances(),
     )
 
     @SealedObjectInstances
