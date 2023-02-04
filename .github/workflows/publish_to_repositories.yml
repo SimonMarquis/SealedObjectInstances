@@ -19,10 +19,6 @@ on:
         default: false
         type: boolean
 
-env:
-  # https://github.com/Kotlin/dokka/issues/1217
-  ORG_GRADLE_PROJECT_org.gradle.unsafe.configuration-cache: false
-
 jobs:
   publish:
     runs-on: ubuntu-latest
