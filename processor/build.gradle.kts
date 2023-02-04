@@ -118,7 +118,7 @@ signing {
     isRequired = true
 }
 
-tasks.withType<Sign>().configureEach {
+tasks.withType<Sign> {
     notCompatibleWithConfigurationCache("https://github.com/gradle/gradle/issues/13470")
 }
 
