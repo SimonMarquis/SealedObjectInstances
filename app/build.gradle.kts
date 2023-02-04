@@ -11,6 +11,7 @@ repositories {
 }
 
 kotlin {
+    jvmToolchain(11)
     sourceSets.main {
         kotlin.srcDir("build/generated/ksp/main/kotlin")
     }
