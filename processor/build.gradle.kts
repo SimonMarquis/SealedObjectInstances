@@ -32,28 +32,35 @@ tasks.test {
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
+    archiveClassifier.set("sources")
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+    from(tasks.javadoc)
+    archiveClassifier.set("javadoc")
+}
+
+val dokkaJavadoc by tasks.getting(DokkaTask::class) {
+    moduleName.set("SealedObjectInstances")
+    outputDirectory.set(rootProject.buildDir.resolve("javadoc"))
+}
+
+val dokkaJavadocJar by tasks.registering(Jar::class) {
+    dependsOn(dokkaJavadoc)
+    from(dokkaJavadoc.outputDirectory)
+    archiveClassifier.set("javadoc")
 }
 
 val dokkaHtml by tasks.getting(DokkaTask::class) {
     moduleName.set("SealedObjectInstances")
-    outputDirectory.set(rootProject.layout.buildDirectory.dir("dokka").get().asFile)
+    outputDirectory.set(rootProject.buildDir.resolve("dokka"))
 }
 
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
+val dokkaHtmlJar by tasks.registering(Jar::class) {
+    dependsOn(dokkaHtml)
     from(dokkaHtml.outputDirectory)
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
-
-artifacts {
-    archives(sourcesJar)
-    archives(javadocJar)
+    archiveClassifier.set("html-docs")
 }
 
 publishing {
@@ -84,7 +91,10 @@ publishing {
     publications {
         register<MavenPublication>("SealedObjectInstances") {
             artifactId = project.property("artifactId") as String
-            from(components["java"])
+            from(components.getByName("kotlin"))
+            artifact(sourcesJar)
+            artifact(dokkaJavadocJar)
+            artifact(dokkaHtmlJar)
             pom {
                 name.set("SealedObjectInstances")
                 description.set("A Kotlin Symbol Processor to list sealed object instances.")
