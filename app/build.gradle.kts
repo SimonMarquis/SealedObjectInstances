@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.ksp)
-    id("com.squareup.sort-dependencies") version "0.1"
 }
 
 repositories {
