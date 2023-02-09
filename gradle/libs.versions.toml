@@ -2,7 +2,7 @@
 junit = "5.9.2"
 dokka = "1.7.20"
 kotlin = "1.8.20-Beta"
-ksp = "1.8.10-1.0.9"
+ksp = "1.8.20-Beta-1.0.9"
 
 [libraries]
 junitApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
