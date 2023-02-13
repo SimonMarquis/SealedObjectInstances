@@ -2,6 +2,9 @@ name: Build
 
 on: push
 
+env:
+  GRADLE_OPTS: '-XX:+HeapDumpOnOutOfMemoryError'
+
 jobs:
   build_test_report:
     name: Build → Test → Report
@@ -13,7 +16,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name: Build
+      - id: build
+        name: Build
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: build --stacktrace
@@ -36,3 +40,9 @@ jobs:
         with:
           name: maven
           path: build/.m2/repository
+      - name: Upload .hprof files
+        if: ${{ failure() && steps.build.outcome == 'failure' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: hprof
+          path: '**/*.hprof'
