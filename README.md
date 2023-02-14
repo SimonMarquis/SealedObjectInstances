@@ -60,7 +60,7 @@ plugins {
 }
 ```
 
-Then add the library dependencies: ![Maven Central](https://img.shields.io/maven-central/v/fr.smarquis.sealed/sealed-object-instances)
+Then add the library dependencies: [![Maven Central](https://img.shields.io/maven-central/v/fr.smarquis.sealed/sealed-object-instances?label=%20&color=success)](https://search.maven.org/artifact/fr.smarquis.sealed/sealed-object-instances) [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/fr.smarquis.sealed/sealed-object-instances?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/fr/smarquis/sealed/sealed-object-instances/)
 
 ```kotlin
 dependencies {
@@ -72,7 +72,7 @@ dependencies {
 <details><summary>🐙 GitHub Packages</summary>
 
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/SimonMarquis/SealedObjectInstances)](https://github.com/SimonMarquis/SealedObjectInstances/packages/1674974/versions)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/SimonMarquis/SealedObjectInstances?label=%20&color=success)](https://github.com/SimonMarquis/SealedObjectInstances/packages/1674974/versions)
 
 > **Note**
 > You'll need to create a personal access token (PAT) with the `read:packages` permission to be able to download from this repository.
@@ -100,7 +100,7 @@ dependencies {
 <details><summary>🚀 JitPack.io</summary>
 
 
-[![JitPack.io](https://jitpack.io/v/SimonMarquis/SealedObjectInstances.svg)](https://jitpack.io/#SimonMarquis/SealedObjectInstances)
+[![JitPack.io](https://img.shields.io/jitpack/version/com.github.SimonMarquis/SealedObjectInstances?color=success&label=%20)](https://jitpack.io/#SimonMarquis/SealedObjectInstances)
 
 ```kotlin
 repositories {
