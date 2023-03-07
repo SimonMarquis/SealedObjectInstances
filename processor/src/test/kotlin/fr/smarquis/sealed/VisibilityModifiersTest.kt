@@ -119,10 +119,10 @@ class VisibilityModifiersTest {
         /* Then */
         assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.exitCode)
         assertTrue("Error message is printed for the receiver type") {
-            "MySealedClass\$sealedObjectInstances.kt: (2, 12): 'public' member exposes its 'internal' receiver type argument MySealedClass" in result.messages
+            "MySealedClass\$sealedObjectInstances.kt:2:12 'public' member exposes its 'internal' receiver type argument MySealedClass" in result.messages
         }
         assertTrue("Error message is printed for the return type") {
-            "MySealedClass\$sealedObjectInstances.kt: (2, 49): 'public' function exposes its 'internal' return type argument MySealedClass" in result.messages
+            "MySealedClass\$sealedObjectInstances.kt:2:49 'public' function exposes its 'internal' return type argument MySealedClass" in result.messages
         }
     }
 
