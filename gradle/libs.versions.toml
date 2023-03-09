@@ -1,13 +1,13 @@
 [versions]
 junit = "5.9.2"
-dokka = "1.7.20"
-kotlin = "1.8.20-Beta"
-ksp = "1.8.20-Beta-1.0.9"
+dokka = "1.8.10"
+kotlin = "1.8.20-RC"
+ksp = "1.8.20-RC-1.0.9"
 
 [libraries]
 junitApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junitRuntime = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-kotlinCompileTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-testing-ksp", version = "1.4.9" }
+kotlinCompileTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-testing-ksp", version = "1.5.0" }
 kotlinReflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
@@ -16,4 +16,4 @@ kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.12.1" }
+binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.0" }
