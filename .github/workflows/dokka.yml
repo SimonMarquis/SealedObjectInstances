@@ -33,7 +33,7 @@ jobs:
         with:
           arguments: dokkaHtml
       - uses: actions/configure-pages@v3.0.5
-      - uses: actions/upload-pages-artifact@v1.0.7
+      - uses: actions/upload-pages-artifact@v1.0.8
         with:
           path: 'build/dokka'
       - id: deployment
