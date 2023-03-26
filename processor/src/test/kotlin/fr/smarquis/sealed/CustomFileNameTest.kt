@@ -22,11 +22,13 @@ import com.tschuchort.compiletesting.kspWithCompilation
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import fr.smarquis.sealed.SealedObjectInstances.RawType.Array
 import fr.smarquis.sealed.SealedObjectInstances.RawType.List
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.Test
 import java.io.File.separator
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 
+@OptIn(ExperimentalCompilerApi::class)
 class CustomFileNameTest {
 
     @SealedObjectInstances

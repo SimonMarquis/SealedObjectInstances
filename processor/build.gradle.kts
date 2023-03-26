@@ -181,6 +181,7 @@ dependencies {
     compileOnly(libs.kotlinReflect)
     kspTest(projects.processor)
     testRuntimeOnly(libs.junitRuntime)
+    testImplementation(libs.kspApi)
     testImplementation(libs.kotlinTest)
     testImplementation(libs.junitApi)
     testImplementation(libs.kotlinCompileTestingKsp)
