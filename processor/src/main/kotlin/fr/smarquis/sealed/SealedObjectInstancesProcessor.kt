@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2023 Simon Marquis
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package fr.smarquis.sealed
 
 import com.google.devtools.ksp.KspExperimental
@@ -7,7 +22,6 @@ import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
-import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.Modifier.SEALED
@@ -31,13 +45,7 @@ import java.io.OutputStreamWriter
 import kotlin.reflect.KClass
 import kotlin.text.Typography.ellipsis
 
-
-class SealedObjectInstancesProcessorProvider : SymbolProcessorProvider {
-    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
-        SealedObjectInstancesProcessor(environment)
-}
-
-private class SealedObjectInstancesProcessor(
+internal class SealedObjectInstancesProcessor(
     private val environment: SymbolProcessorEnvironment,
 ) : SymbolProcessor {
 
@@ -64,7 +72,7 @@ private class SealedObjectInstancesProcessor(
     @OptIn(KspExperimental::class)
     private fun KSClassDeclaration.annotations() = getAnnotationsByType(SealedObjectInstances::class).toList().also {
         if (it.size == it.distinctBy(SealedObjectInstances::name).size) return@also
-        else environment.logger.error(
+        environment.logger.error(
             message = "Duplicated names: ${it.groupingBy(SealedObjectInstances::name).eachCount()}",
             symbol = this,
         )
@@ -74,16 +82,16 @@ private class SealedObjectInstancesProcessor(
         environment.codeGenerator.createNewFile(
             dependencies = Dependencies(
                 aggregating = true,
-                sources = sealedObjectInstances().map { it.containingFile!! }.plus(containingFile!!).toTypedArray()
+                sources = sealedObjectInstances().map { it.containingFile!! }.plus(containingFile!!).toTypedArray(),
             ),
             packageName = containingFile!!.packageName.asString(),
-            fileName = fileName ?: "${simpleName.asString()}\$sealedObjectInstances"
+            fileName = fileName ?: "${simpleName.asString()}\$sealedObjectInstances",
         )
     }.onFailure {
         when (it) {
             is FileAlreadyExistsException -> environment.logger.error(
                 message = "Duplicated file detected! You can override the generated file name with @${SealedObjectInstances::class.simpleName}(${SealedObjectInstances::fileName.name}=\"$ellipsis\")",
-                symbol = this
+                symbol = this,
             )
         }
     }.getOrThrow()
@@ -150,13 +158,12 @@ private class SealedObjectInstancesProcessor(
 
     private fun KSClassDeclaration.genericsReturnTypes(): String? = generics()
         ?.joinToString(prefix = "<", separator = ", ", postfix = ">") { (variance, type) ->
-            if (type == null) "*"
-            else when (variance) {
+            if (type == null) return@joinToString "*"
+            when (variance) {
                 INVARIANT -> "out $type"
                 COVARIANT -> type
                 CONTRAVARIANT -> "*"
                 STAR -> TODO("Unsupported STAR variance!")
             }
         }
-
 }

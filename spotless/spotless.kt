@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Simon Marquis
+ * Copyright (C) $YEAR Simon Marquis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package fr.smarquis.sealed
-
-@SealedObjectInstances
-sealed class MySealedClass {
-    object Object : MySealedClass()
-    data class Data(val any: Any) : MySealedClass() {
-        object NestedObject : MySealedClass()
-    }
-}
-
-object OutsideObject : MySealedClass()

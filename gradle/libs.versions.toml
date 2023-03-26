@@ -3,6 +3,7 @@ junit = "5.9.2"
 dokka = "1.8.10"
 kotlin = "1.8.10"
 ksp = "1.8.10-1.0.9"
+ktlint = "0.48.2"
 
 [libraries]
 junitApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
@@ -11,9 +12,11 @@ kotlinCompileTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-te
 kotlinReflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.0" }
+spotless = { id = "com.diffplug.spotless", version = "6.17.0" }

@@ -15,12 +15,11 @@
  */
 package fr.smarquis.sealed
 
-@SealedObjectInstances
-sealed class MySealedClass {
-    object Object : MySealedClass()
-    data class Data(val any: Any) : MySealedClass() {
-        object NestedObject : MySealedClass()
-    }
-}
+import com.google.devtools.ksp.processing.SymbolProcessor
+import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
+import com.google.devtools.ksp.processing.SymbolProcessorProvider
 
-object OutsideObject : MySealedClass()
+class SealedObjectInstancesProcessorProvider : SymbolProcessorProvider {
+    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
+        SealedObjectInstancesProcessor(environment)
+}
