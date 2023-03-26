@@ -24,8 +24,8 @@ import fr.smarquis.sealed.SealedObjectInstances.RawType.Array
 import fr.smarquis.sealed.SealedObjectInstances.RawType.List
 import org.junit.jupiter.api.Test
 import java.io.File.separator
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class CustomFileNameTest {
 
@@ -69,14 +69,18 @@ class CustomFileNameTest {
         /* Then */
         assertEquals(ExitCode.OK, result.exitCode)
         /* $sealedObjectInstances.kt */
-        assertTrue("${'$'}sealedObjectInstances.kt source file is generated") {
-            """ksp${separator}sources${separator}kotlin${separator}CustomFileNameSealedClass${'$'}sealedObjectInstances.kt""" in result.messages
-        }
+        assertContains(
+            message = "${'$'}sealedObjectInstances.kt source file is generated",
+            charSequence = result.messages,
+            other = """ksp${separator}sources${separator}kotlin${separator}CustomFileNameSealedClass${'$'}sealedObjectInstances.kt""",
+        )
         result.generatedFiles.single { it.name == "CustomFileNameSealedClass_sealedObjectInstancesKt.class" }
         /* custom_file_name.kt */
-        assertTrue("custom_file_name.kt source file is generated") {
-            """ksp${separator}sources${separator}kotlin${separator}custom_file_name.kt""" in result.messages
-        }
+        assertContains(
+            message = "custom_file_name.kt source file is generated",
+            charSequence = result.messages,
+            other = """ksp${separator}sources${separator}kotlin${separator}custom_file_name.kt""",
+        )
         result.generatedFiles.single { it.name == "Custom_file_nameKt.class" }
     }
 }

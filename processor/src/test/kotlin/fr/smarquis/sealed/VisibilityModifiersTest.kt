@@ -24,8 +24,8 @@ import fr.smarquis.sealed.SealedObjectInstances.Visibility.Public
 import kotlin.reflect.KVisibility.INTERNAL
 import kotlin.reflect.KVisibility.PUBLIC
 import kotlin.test.Test
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class VisibilityModifiersTest {
 
@@ -100,9 +100,11 @@ class VisibilityModifiersTest {
 
         /* Then */
         assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.exitCode)
-        assertTrue("Error message is printed") {
-            "MySealedClass.kt:4: Unsupported [private] visibility." in result.messages
-        }
+        assertContains(
+            message = "Error message is printed",
+            charSequence = result.messages,
+            other = "MySealedClass.kt:4: Unsupported [private] visibility.",
+        )
     }
 
     @Test
@@ -132,11 +134,15 @@ class VisibilityModifiersTest {
 
         /* Then */
         assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.exitCode)
-        assertTrue("Error message is printed for the receiver type") {
-            "MySealedClass\$sealedObjectInstances.kt:2:12 'public' member exposes its 'internal' receiver type argument MySealedClass" in result.messages
-        }
-        assertTrue("Error message is printed for the return type") {
-            "MySealedClass\$sealedObjectInstances.kt:2:49 'public' function exposes its 'internal' return type argument MySealedClass" in result.messages
-        }
+        assertContains(
+            message = "Error message is printed for the receiver type",
+            charSequence = result.messages,
+            other = "MySealedClass\$sealedObjectInstances.kt:2:12 'public' member exposes its 'internal' receiver type argument MySealedClass",
+        )
+        assertContains(
+            message = "Error message is printed for the return type",
+            charSequence = result.messages,
+            other = "MySealedClass\$sealedObjectInstances.kt:2:49 'public' function exposes its 'internal' return type argument MySealedClass",
+        )
     }
 }

@@ -21,8 +21,8 @@ import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspWithCompilation
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import org.junit.jupiter.api.Test
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class DuplicatedNamesTest {
 
@@ -54,8 +54,10 @@ class DuplicatedNamesTest {
 
         /* Then */
         assertEquals(ExitCode.COMPILATION_ERROR, result.exitCode)
-        assertTrue("Error message is printed") {
-            "MySealedClass.kt:7: Duplicated names: {sealedObjectInstances=1, values=2}" in result.messages
-        }
+        assertContains(
+            message = "Error message is printed",
+            charSequence = result.messages,
+            other = "MySealedClass.kt:7: Duplicated names: {sealedObjectInstances=1, values=2}",
+        )
     }
 }

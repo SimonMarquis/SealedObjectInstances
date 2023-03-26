@@ -21,8 +21,8 @@ import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspWithCompilation
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import org.junit.jupiter.api.Test
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class SealedClassesNameCollisionTest {
 
@@ -54,14 +54,20 @@ class SealedClassesNameCollisionTest {
 
         /* Then */
         assertEquals(ExitCode.INTERNAL_ERROR, result.exitCode)
-        assertTrue("Internal error message is printed") {
-            "e: Error occurred in KSP, check log for detail" in result.messages
-        }
-        assertTrue("FileAlreadyExistsException is printed") {
-            "e: [ksp] kotlin.io.FileAlreadyExistsException:" in result.messages
-        }
-        assertTrue("Custom error message is printed") {
-            "Duplicated file detected! You can override the generated file name with @SealedObjectInstances(fileName=\"…\")" in result.messages
-        }
+        assertContains(
+            message = "Internal error message is printed",
+            charSequence = result.messages,
+            other = "e: Error occurred in KSP, check log for detail",
+        )
+        assertContains(
+            message = "FileAlreadyExistsException is printed",
+            charSequence = result.messages,
+            other = "e: [ksp] kotlin.io.FileAlreadyExistsException:",
+        )
+        assertContains(
+            message = "Custom error message is printed",
+            charSequence = result.messages,
+            other = "Duplicated file detected! You can override the generated file name with @SealedObjectInstances(fileName=\"…\")",
+        )
     }
 }
