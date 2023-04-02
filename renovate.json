@@ -6,7 +6,7 @@
   "packageRules": [
     {
       "extends": "monorepo:kotlin",
-      "groupName": "Kotlin and KSP",
+      "groupName": "Kotlin",
       "matchPackagePrefixes": [
         "org.jetbrains.kotlin",
         "com.google.devtools.ksp"
