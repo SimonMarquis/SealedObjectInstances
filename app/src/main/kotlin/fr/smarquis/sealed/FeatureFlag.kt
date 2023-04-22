@@ -15,7 +15,7 @@
  */
 package fr.smarquis.sealed
 
-@SealedObjectInstances
 sealed class FeatureFlag {
+    @SealedObjectInstances companion object;
     abstract val isEnabled: Boolean
 }
