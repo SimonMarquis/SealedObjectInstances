@@ -175,3 +175,7 @@ fun KClass<FeatureFlag>.values(): Array<FeatureFlag>
 
 - Having multiple sealed classes/interfaces with the same name in the same package is currently not supported, and the KSP will fail. But this can be avoided by providing a custom generated `fileName` on the `SealedObjectInstances` annotation.
 - [KT-8970](https://youtrack.jetbrains.com/issue/KT-8970/Object-is-uninitialized-null-when-accessed-from-static-context-ex-companion-object-with-initialization-loop): Using the extension from a static context (e.g. `companion object`), will return `null` values. A simple solution is to delegate to a lazy initializer: `val values by lazy(MySealedClass::class::sealedObjectInstances)`.
+- Does not support non-standard (alphanumeric) class names that needs backticks like:
+  ```kotlin
+  sealed class `A-B-C`
+  ```
