@@ -52,31 +52,53 @@ internal class SealedObjectInstancesProcessor(
     override fun process(resolver: Resolver): List<KSAnnotated> {
         resolver.getSymbolsWithAnnotation(SealedObjectInstances::class.qualifiedName!!)
             .filterIsInstance<KSClassDeclaration>()
-            .filter { SEALED in it.modifiers }
-            .forEach(::process)
+            .groupBy { it.sealedClass() }
+            .filterNotNullValues()
+            .mapValues { it.annotations() }
+            .forEach { it.process() }
         return emptyList()
     }
 
-    private fun process(declaration: KSClassDeclaration) = declaration.annotations()
+    /**
+     * @return the corresponding sealed class declaration for the [this] declaration.
+     */
+    private fun KSClassDeclaration.sealedClass() = when {
+        SEALED in modifiers -> this
+        isCompanionObject -> parentDeclaration as KSClassDeclaration
+        else -> environment.logger.error(
+            message = "Failed to find a corresponding sealed class!",
+            symbol = this,
+        ).let { null }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun <K : Any, V> Map<K?, V>.filterNotNullValues(): Map<K, V> = filterKeys { it != null } as Map<K, V>
+
+    /**
+     * @return the [List] of [SealedObjectInstances] annotations for [this] entry.
+     */
+    @OptIn(KspExperimental::class)
+    private fun Map.Entry<KSClassDeclaration, List<KSClassDeclaration>>.annotations() = value
+        .flatMap { it.getAnnotationsByType(SealedObjectInstances::class) }
+        .also {
+            if (it.size == it.distinctBy(SealedObjectInstances::name).size) return@also
+            environment.logger.error(
+                message = "Duplicated names: ${it.groupingBy(SealedObjectInstances::name).eachCount()}",
+                symbol = key,
+            )
+        }
+
+    private fun Map.Entry<KSClassDeclaration, List<SealedObjectInstances>>.process() = value
         .groupBy { it.fileName.takeUnless(String::isBlank) }
-        .mapKeys { declaration.createNewFile(it.key) }
+        .mapKeys { key.createNewFile(it.key) }
         .forEach { (file, annotations) ->
             file.writer().use {
-                it.appendHeader(declaration)
+                it.appendHeader(key)
                 annotations.forEach { annotation ->
-                    it.appendMethod(declaration, annotation)
+                    it.appendMethod(key, annotation)
                 }
             }
         }
-
-    @OptIn(KspExperimental::class)
-    private fun KSClassDeclaration.annotations() = getAnnotationsByType(SealedObjectInstances::class).toList().also {
-        if (it.size == it.distinctBy(SealedObjectInstances::name).size) return@also
-        environment.logger.error(
-            message = "Duplicated names: ${it.groupingBy(SealedObjectInstances::name).eachCount()}",
-            symbol = this,
-        )
-    }
 
     private fun KSClassDeclaration.createNewFile(fileName: String?) = runCatching {
         environment.codeGenerator.createNewFile(
@@ -118,12 +140,27 @@ internal class SealedObjectInstancesProcessor(
             postfix = ")",
         ) { it.qualifiedName!!.asString() }
 
-        // language=kotlin
+        // language=kotlin ~ Extension on the KClass
         """
         /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */
         ${visibility.modifier()} fun $receiverType.$methodName()$returnType = $collectionBuilder
         """.trimIndent().let(::appendLine)
+
+        sealed.companionOrNull()?.let {
+            // language=kotlin ~ Extension on the companion object
+            """
+            /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */
+            ${visibility.modifier()} fun $sealedClassName$genericReceiverType.$it.$methodName()$returnType = $sealedClassName$genericReceiverType::class.$methodName()
+            """.trimIndent().let(::appendLine)
+        }
     }
+
+    /**
+     * @return the companion object of [this] declaration or `null` if it does not exist.
+     */
+    private fun KSClassDeclaration.companionOrNull() = declarations
+        .filterIsInstance<KSClassDeclaration>()
+        .singleOrNull { it.isCompanionObject }
 
     private fun KSClassDeclaration.getVisibility(
         annotation: SealedObjectInstances,
