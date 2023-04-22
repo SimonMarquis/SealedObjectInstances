@@ -52,7 +52,7 @@ val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 
 ## Setup
 
-In the module's build script, apply the `com.google.devtools.ksp` plugin with the matching Kotlin version: [![Maven Central](https://img.shields.io/maven-central/v/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin?label=%20&color=success)](https://search.maven.org/artifact/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin)
+In the module's build script, apply the `com.google.devtools.ksp` plugin with the matching Kotlin version: [![Maven Central](https://img.shields.io/maven-central/v/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin?label=%20&color=success)](https://central.sonatype.com/artifact/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin)
 
 ```kotlin
 plugins {
@@ -60,7 +60,7 @@ plugins {
 }
 ```
 
-Then add the library dependencies: [![Maven Central](https://img.shields.io/maven-central/v/fr.smarquis.sealed/sealed-object-instances?label=%20&color=success)](https://search.maven.org/artifact/fr.smarquis.sealed/sealed-object-instances) [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/fr.smarquis.sealed/sealed-object-instances?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/fr/smarquis/sealed/sealed-object-instances/)
+Then add the library dependencies: [![Maven Central](https://img.shields.io/maven-central/v/fr.smarquis.sealed/sealed-object-instances?label=%20&color=success)](https://central.sonatype.com/artifact/fr.smarquis.sealed/sealed-object-instances) [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/fr.smarquis.sealed/sealed-object-instances?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/fr/smarquis/sealed/sealed-object-instances/)
 
 ```kotlin
 dependencies {
