@@ -18,6 +18,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.repository == 'SimonMarquis/SealedObjectInstances'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
