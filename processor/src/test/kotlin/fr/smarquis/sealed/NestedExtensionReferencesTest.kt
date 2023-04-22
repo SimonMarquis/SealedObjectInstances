@@ -24,14 +24,14 @@ class NestedExtensionReferencesTest {
     sealed class Sealed {
         object Object : Sealed()
         companion object {
-            val values get() = Sealed::class.sealedObjectInstances()
-            val lazyValues by lazy(Sealed::class::sealedObjectInstances)
+            val values get() = Sealed.sealedObjectInstances()
+            val lazyValues by lazy(Companion::sealedObjectInstances)
         }
     }
 
     @Test
     fun `referencing extension from within the class compiles and returns the same values`() {
-        assertEquals(Sealed::class.sealedObjectInstances(), Sealed.values)
-        assertEquals(Sealed::class.sealedObjectInstances(), Sealed.lazyValues)
+        assertEquals(Sealed.sealedObjectInstances(), Sealed.values)
+        assertEquals(Sealed.sealedObjectInstances(), Sealed.lazyValues)
     }
 }

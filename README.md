@@ -50,6 +50,17 @@ And then you'll have access to the `sealedObjectInstances()` extension on the co
 val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 ```
 
+> **Note**  
+> You can annotate the `companion object` to access a simpler extension function (no more `::class` prefix).
+> ```kotlin
+> sealed class FeatureFlag {
+>     @SealedObjectInstances companion object
+>     /*...*/
+> }
+>
+> val flags: Set<FeatureFlag> = FeatureFlag.sealedObjectInstances()
+> ```
+
 ## Setup
 
 In the module's build script, apply the `com.google.devtools.ksp` plugin with the matching Kotlin version: [![Maven Central](https://img.shields.io/maven-central/v/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin?label=%20&color=success)](https://central.sonatype.com/artifact/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin)
