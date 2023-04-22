@@ -66,5 +66,4 @@ class CompanionObjectTest {
         expected = SealedClassWithNameCompanionObject::class.sealedObjectInstances().single(),
         actual = SealedClassWithNameCompanionObject.sealedObjectInstances().single(),
     )
-
 }
