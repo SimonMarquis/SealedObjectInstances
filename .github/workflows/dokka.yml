@@ -1,8 +1,8 @@
 name: Publish Dokka to GitHub Pages
 
 on:
-  push:
-    branches: [ "main" ]
+  release:
+    types: [ created ]
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
