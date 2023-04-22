@@ -52,11 +52,11 @@ val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 
 ## Setup
 
-In the module's build script, apply the `com.google.devtools.ksp` plugin with the current Kotlin version:
+In the module's build script, apply the `com.google.devtools.ksp` plugin with the matching Kotlin version: [![Maven Central](https://img.shields.io/maven-central/v/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin?label=%20&color=success)](https://search.maven.org/artifact/com.google.devtools.ksp/com.google.devtools.ksp.gradle.plugin)
 
 ```kotlin
 plugins {
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+    id("com.google.devtools.ksp") version "<version>"
 }
 ```
 
