@@ -50,8 +50,8 @@ And then you'll have access to the `sealedObjectInstances()` extension on the co
 val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 ```
 
-> **Note**
-> Alternatively, you can annotate the `companion object` to access a simpler extension function (no more `::class` prefix).
+> **Note**  
+> You can annotate the `companion object` to access a simpler extension function (no more `::class` prefix).
 > ```kotlin
 > sealed class FeatureFlag {
 >     @SealedObjectInstances companion object

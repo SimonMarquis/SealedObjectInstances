@@ -32,7 +32,6 @@ allprojects {
         val licenseHeader = rootProject.file("spotless/spotless.kt")
         format("misc") {
             target("**/*.md", "**/.gitignore")
-            trimTrailingWhitespace()
             endWithNewline()
         }
         kotlin {
