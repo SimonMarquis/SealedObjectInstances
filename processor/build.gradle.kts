@@ -41,6 +41,11 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+tasks.withType<AbstractArchiveTask> {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
+
 tasks.test {
     useJUnitPlatform()
 }
