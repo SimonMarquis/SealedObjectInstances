@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [1.6.1]
+
+_2023-04-23_
+
+- 🩹 Ignore duplicated annotations by @SimonMarquis in https://github.com/SimonMarquis/SealedObjectInstances/pull/75
+- Update dependency gradle to v8.1.1 by @renovate in https://github.com/SimonMarquis/SealedObjectInstances/pull/68
+
 ## [1.6.0]
 
 _2023-04-22_
@@ -64,7 +71,8 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.6.0...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.6.1...HEAD
+[1.6.1]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.1
 [1.6.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.0
 [1.5.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.5.0
 [1.4.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.4.0
