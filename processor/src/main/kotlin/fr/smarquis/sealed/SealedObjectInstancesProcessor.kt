@@ -41,6 +41,7 @@ import fr.smarquis.sealed.SealedObjectInstances.Visibility.Internal
 import fr.smarquis.sealed.SealedObjectInstances.Visibility.Private
 import fr.smarquis.sealed.SealedObjectInstances.Visibility.Public
 import fr.smarquis.sealed.SealedObjectInstances.Visibility.Unspecified
+import fr.smarquis.sealed.SealedObjectInstancesDataClass.Companion.toDataClass
 import java.io.OutputStreamWriter
 import kotlin.reflect.KClass
 import kotlin.text.Typography.ellipsis
@@ -80,6 +81,7 @@ internal class SealedObjectInstancesProcessor(
     @OptIn(KspExperimental::class)
     private fun Map.Entry<KSClassDeclaration, List<KSClassDeclaration>>.annotations() = value
         .flatMap { it.getAnnotationsByType(SealedObjectInstances::class) }
+        .distinctBy { it.toDataClass() }
         .also {
             if (it.size == it.distinctBy(SealedObjectInstances::name).size) return@also
             environment.logger.error(

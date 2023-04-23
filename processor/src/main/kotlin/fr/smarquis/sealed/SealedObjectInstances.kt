@@ -60,3 +60,25 @@ annotation class SealedObjectInstances(
 
     enum class Visibility { Unspecified, Public, Internal, Private }
 }
+
+/**
+ * This intermediate data class is necessary to easily compare two [SealedObjectInstances],
+ * because [hashCode] and [equals] can not be part of the annotation class.
+ */
+internal data class SealedObjectInstancesDataClass(
+    val name: String,
+    val rawType: SealedObjectInstances.RawType,
+    val visibility: SealedObjectInstances.Visibility,
+    val fileName: String,
+    val returnType: Boolean,
+) {
+    companion object {
+        internal fun SealedObjectInstances.toDataClass() = SealedObjectInstancesDataClass(
+            name = name,
+            rawType = rawType,
+            visibility = visibility,
+            fileName = fileName,
+            returnType = returnType,
+        )
+    }
+}
