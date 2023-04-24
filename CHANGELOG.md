@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.6.2]
+
+_2023-04-23_
+
+- 🩹 Apply visibility modifier to Companion object extensions by @SimonMarquis in https://github.com/SimonMarquis/SealedObjectInstances/pull/76
+
 ## [1.6.1]
 
 _2023-04-23_
@@ -71,7 +77,8 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.6.1...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.6.2...HEAD
+[1.6.2]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.2
 [1.6.1]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.1
 [1.6.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.0
 [1.5.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.5.0
