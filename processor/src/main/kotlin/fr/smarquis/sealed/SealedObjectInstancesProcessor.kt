@@ -126,9 +126,7 @@ internal class SealedObjectInstancesProcessor(
     }
 
     private fun OutputStreamWriter.appendMethod(sealed: KSClassDeclaration, annotation: SealedObjectInstances) {
-        val visibility = sealed.getVisibility(annotation).also {
-            if (it == Private) environment.logger.error("Unsupported [private] visibility.", sealed)
-        }
+        val visibility = sealed.getVisibility(annotation)
         val sealedClassName = sealed.qualifiedName!!.asString()
         val genericReceiverType = sealed.genericsReceiverTypes().orEmpty()
         val receiverType = "${KClass::class.qualifiedName}<$sealedClassName$genericReceiverType>"
@@ -149,10 +147,11 @@ internal class SealedObjectInstancesProcessor(
         """.trimIndent().let(::appendLine)
 
         sealed.companionOrNull()?.let {
+            val companionVisibility = it.getVisibility(annotation)
             // language=kotlin ~ Extension on the companion object
             """
             /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */
-            ${visibility.modifier()} fun $sealedClassName$genericReceiverType.$it.$methodName()$returnType = $sealedClassName$genericReceiverType::class.$methodName()
+            ${companionVisibility.modifier()} fun $sealedClassName$genericReceiverType.$it.$methodName()$returnType = $sealedClassName$genericReceiverType::class.$methodName()
             """.trimIndent().let(::appendLine)
         }
     }
@@ -173,7 +172,7 @@ internal class SealedObjectInstancesProcessor(
             PROTECTED, INTERNAL, LOCAL, JAVA_PACKAGE -> Internal
             PRIVATE -> Private
         }
-    }
+    }.also { if (it == Private) environment.logger.error("Unsupported [private] visibility.", this) }
 
     private fun Visibility.modifier() = when (this) {
         Unspecified, Public -> "public"

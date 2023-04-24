@@ -75,6 +75,23 @@ class VisibilityModifiersTest {
     fun `explicit internal visibility becomes internal`() =
         assertEquals(INTERNAL, SealedExplicitInternalVisibility::class::sealedObjectInstances.visibility)
 
+    sealed class CompanionImplicitInternalVisibility {
+        @SealedObjectInstances internal companion object
+    }
+
+    @Test
+    fun `companion implicit internal visibility becomes internal`() =
+        assertEquals(INTERNAL, CompanionImplicitInternalVisibility::sealedObjectInstances.visibility)
+
+    sealed class CompanionExplicitInternalVisibility {
+        @SealedObjectInstances(visibility = Internal)
+        companion object
+    }
+
+    @Test
+    fun `companion explicit internal visibility becomes internal`() =
+        assertEquals(INTERNAL, CompanionExplicitInternalVisibility::sealedObjectInstances.visibility)
+
     @Test
     fun `compilation fails when visibility of sealed class is private`() {
         /* Given */
@@ -108,7 +125,38 @@ class VisibilityModifiersTest {
     }
 
     @Test
-    fun `compilation fails when requested visibility is larger than actual visibility`() {
+    fun `compilation fails when visibility of companion object is private`() {
+        /* Given */
+        val source = SourceFile.kotlin(
+            name = "MySealedClass.kt",
+            contents = """
+                |import fr.smarquis.sealed.SealedObjectInstances
+                |
+                |sealed class MySealedClass {
+                |    @SealedObjectInstances private companion object
+                |}
+            """.trimMargin(),
+        )
+
+        /* When */
+        val result = KotlinCompilation().apply {
+            sources = listOf(source)
+            symbolProcessorProviders = listOf(SealedObjectInstancesProcessorProvider())
+            kspWithCompilation = true
+            inheritClassPath = true
+        }.compile()
+
+        /* Then */
+        assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.exitCode)
+        assertContains(
+            message = "Error message is printed",
+            charSequence = result.messages,
+            other = "MySealedClass.kt:4: Unsupported [private] visibility.",
+        )
+    }
+
+    @Test
+    fun `compilation fails when requested visibility of sealed class is larger than actual visibility`() {
         /* Given */
         val source = SourceFile.kotlin(
             name = "MySealedClass.kt",
@@ -143,6 +191,39 @@ class VisibilityModifiersTest {
             message = "Error message is printed for the return type",
             charSequence = result.messages,
             other = "MySealedClass\$sealedObjectInstances.kt:2:49 'public' function exposes its 'internal' return type argument MySealedClass",
+        )
+    }
+
+    @Test
+    fun `compilation fails when requested visibility of companion object is larger than actual visibility`() {
+        /* Given */
+        val source = SourceFile.kotlin(
+            name = "MySealedClass.kt",
+            contents = """
+                |import fr.smarquis.sealed.SealedObjectInstances
+                |import fr.smarquis.sealed.SealedObjectInstances.Visibility.Public
+                |import fr.smarquis.sealed.SealedObjectInstances.RawType.*
+                |
+                |sealed class MySealedClass {
+                |    @SealedObjectInstances(visibility = Public) internal companion object
+                |}
+            """.trimMargin(),
+        )
+
+        /* When */
+        val result = KotlinCompilation().apply {
+            sources = listOf(source)
+            symbolProcessorProviders = listOf(SealedObjectInstancesProcessorProvider())
+            kspWithCompilation = true
+            inheritClassPath = true
+        }.compile()
+
+        /* Then */
+        assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.exitCode)
+        assertContains(
+            message = "Error message is printed for the receiver type",
+            charSequence = result.messages,
+            other = "MySealedClass\$sealedObjectInstances.kt:4:12 'public' member exposes its 'internal' receiver type Companion",
         )
     }
 }
