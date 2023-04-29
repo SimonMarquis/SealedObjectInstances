@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.6.3]
+
+_2023-04-29_
+
+- Downgrade compatibility version to JVM 11 @SimonMarquis in https://github.com/SimonMarquis/SealedObjectInstances/pull/83
+
 ## [1.6.2]
 
 _2023-04-23_
@@ -77,7 +83,8 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.6.2...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.6.3...HEAD
+[1.6.3]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.3
 [1.6.2]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.2
 [1.6.1]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.1
 [1.6.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.0
