@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -35,9 +36,15 @@ kotlin {
     }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        allWarningsAsErrors = true
+    compilerOptions {
+        allWarningsAsErrors.set(true)
+        jvmTarget.set(JVM_11)
     }
 }
 
