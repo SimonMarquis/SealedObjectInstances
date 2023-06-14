@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -24,8 +25,12 @@ repositories {
     mavenCentral()
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 kotlin {
-    jvmToolchain(17)
     sourceSets.main {
         kotlin.srcDir("build/generated/ksp/main/kotlin")
     }
@@ -35,8 +40,9 @@ kotlin {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        allWarningsAsErrors = true
+    compilerOptions {
+        allWarningsAsErrors.set(true)
+        jvmTarget.set(JVM_11)
     }
 }
 

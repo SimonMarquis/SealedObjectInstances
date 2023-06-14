@@ -26,19 +26,18 @@ plugins {
     signing
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 kotlin {
-    jvmToolchain(17)
     sourceSets.main {
         kotlin.srcDir("build/generated/ksp/main/kotlin")
     }
     sourceSets.test {
         kotlin.srcDir("build/generated/ksp/test/kotlin")
     }
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }
 
 tasks.withType<KotlinCompile> {
