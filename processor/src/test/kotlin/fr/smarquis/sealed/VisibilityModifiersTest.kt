@@ -92,6 +92,14 @@ class VisibilityModifiersTest {
     fun `companion explicit internal visibility becomes internal`() =
         assertEquals(INTERNAL, CompanionExplicitInternalVisibility::sealedObjectInstances.visibility)
 
+    internal sealed class CompanionInferredVisibilityInternal {
+        @SealedObjectInstances companion object
+    }
+
+    @Test
+    fun `companion inferred visibility becomes internal`() =
+        assertEquals(INTERNAL, CompanionInferredVisibilityInternal::sealedObjectInstances.visibility)
+
     @Test
     fun `compilation fails when visibility of sealed class is private`() {
         /* Given */

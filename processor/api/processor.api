@@ -22,7 +22,7 @@ public final class fr/smarquis/sealed/SealedObjectInstances$RawType : java/lang/
 	public static fun values ()[Lfr/smarquis/sealed/SealedObjectInstances$RawType;
 }
 
-public final class fr/smarquis/sealed/SealedObjectInstances$Visibility : java/lang/Enum {
+public final class fr/smarquis/sealed/SealedObjectInstances$Visibility : java/lang/Enum, java/lang/Comparable {
 	public static final field Internal Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
 	public static final field Private Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
 	public static final field Public Lfr/smarquis/sealed/SealedObjectInstances$Visibility;

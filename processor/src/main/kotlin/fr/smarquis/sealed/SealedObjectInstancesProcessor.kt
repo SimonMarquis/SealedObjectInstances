@@ -147,7 +147,7 @@ internal class SealedObjectInstancesProcessor(
         """.trimIndent().let(::appendLine)
 
         sealed.companionOrNull()?.let {
-            val companionVisibility = it.getVisibility(annotation)
+            val companionVisibility = maxOf(visibility, it.getVisibility(annotation))
             // language=kotlin ~ Extension on the companion object
             """
             /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */

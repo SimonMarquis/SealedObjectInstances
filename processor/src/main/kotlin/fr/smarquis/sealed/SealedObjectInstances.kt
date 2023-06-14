@@ -58,7 +58,7 @@ annotation class SealedObjectInstances(
         Set(kotlin.collections.Set::class, ::setOf),
     }
 
-    enum class Visibility { Unspecified, Public, Internal, Private }
+    enum class Visibility : Comparable<Visibility> { Unspecified, Public, Internal, Private }
 }
 
 /**
