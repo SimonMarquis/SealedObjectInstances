@@ -66,4 +66,16 @@ class CompanionObjectTest {
         expected = SealedClassWithNameCompanionObject::class.sealedObjectInstances().single(),
         actual = SealedClassWithNameCompanionObject.sealedObjectInstances().single(),
     )
+
+    @SealedObjectInstances
+    sealed class AnnotatedSealedClassWithGeneric<T> {
+        companion object
+        object INSTANCE : AnnotatedSealedClassWithGeneric<Unit>()
+    }
+
+    @Test
+    fun testAnnotatedSealedClassWithGeneric() = assertSame(
+        expected = AnnotatedSealedClassWithGeneric::class.sealedObjectInstances().single(),
+        actual = AnnotatedSealedClassWithGeneric.sealedObjectInstances().single(),
+    )
 }

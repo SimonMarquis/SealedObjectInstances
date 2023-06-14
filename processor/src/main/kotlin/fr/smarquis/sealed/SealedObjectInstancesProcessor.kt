@@ -151,7 +151,7 @@ internal class SealedObjectInstancesProcessor(
             // language=kotlin ~ Extension on the companion object
             """
             /** @return [$rawClassName] of sealed object instances of type [$sealedClassName]. */
-            ${companionVisibility.modifier()} fun $sealedClassName$genericReceiverType.$it.$methodName()$returnType = $sealedClassName$genericReceiverType::class.$methodName()
+            ${companionVisibility.modifier()} fun $sealedClassName.$it.$methodName()$returnType = $sealedClassName::class.$methodName()
             """.trimIndent().let(::appendLine)
         }
     }
