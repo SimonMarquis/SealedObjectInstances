@@ -168,11 +168,12 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.kspApi)
-    implementation(libs.kotlinReflect)
+    compileOnly(libs.kspApi)
+    compileOnly(libs.kotlinReflect)
     kspTest(projects.processor)
+    testRuntimeOnly(libs.junitRuntime)
     testImplementation(libs.kotlinTest)
     testImplementation(libs.junitApi)
-    testRuntimeOnly(libs.junitRuntime)
     testImplementation(libs.kotlinCompileTestingKsp)
+    testImplementation(libs.kotlinReflect)
 }

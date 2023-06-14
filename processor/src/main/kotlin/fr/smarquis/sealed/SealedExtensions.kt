@@ -36,6 +36,7 @@ private tailrec fun KSClassDeclaration.recursiveSealedObjectInstances(
 
 //region Reflect
 /**
+ * This method expects having access to `org.jetbrains.kotlin:kotlin-reflect`.
  * @return the [Set] of [T] instances through reflection.
  */
 fun <T : Any> KClass<T>.reflectSealedObjectInstances(): Set<T> = recursiveSealedObjectInstances()
