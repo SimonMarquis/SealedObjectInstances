@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -54,6 +58,12 @@ tasks.withType<AbstractArchiveTask> {
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events = setOf(SKIPPED, PASSED, FAILED)
+        showExceptions = true
+        showStackTraces = true
+        exceptionFormat = FULL
+    }
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
