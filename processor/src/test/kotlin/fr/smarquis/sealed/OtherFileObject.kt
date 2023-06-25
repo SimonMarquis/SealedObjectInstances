@@ -15,4 +15,4 @@
  */
 package fr.smarquis.sealed
 
-object OtherFileObject : MySealedClass()
+data object OtherFileObject : MySealedClass()

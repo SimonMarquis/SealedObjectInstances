@@ -31,7 +31,7 @@ class CustomNamesAndTypes {
     @SealedObjectInstances(name = "list", rawType = List)
     @SealedObjectInstances(name = "set", rawType = Set)
     sealed class SealedClassWithCustomNames {
-        object INSTANCE : SealedClassWithCustomNames()
+        data object INSTANCE : SealedClassWithCustomNames()
     }
 
     @Test

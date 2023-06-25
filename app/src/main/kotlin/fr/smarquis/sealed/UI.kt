@@ -16,7 +16,7 @@
 package fr.smarquis.sealed
 
 sealed class UI(override val isEnabled: Boolean = false) : FeatureFlag() {
-    @SealedObjectInstances companion object
-    object Animations : UI()
-    object Framerate : UI()
+    @SealedObjectInstances companion object;
+    data object Animations : UI()
+    data object Framerate : UI()
 }

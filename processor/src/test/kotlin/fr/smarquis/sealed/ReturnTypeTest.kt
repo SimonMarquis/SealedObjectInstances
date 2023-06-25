@@ -38,7 +38,7 @@ class ReturnTypeTest {
                 |
                 |@SealedObjectInstances
                 |sealed class MySealedClass {
-                |    object Object: MySealedClass()
+                |    data object Object: MySealedClass()
                 |}
             """.trimMargin(),
         )
@@ -69,7 +69,7 @@ class ReturnTypeTest {
                 |
                 |@SealedObjectInstances(returnType = false)
                 |sealed class MySealedClass {
-                |    object Object: MySealedClass()
+                |    data object Object: MySealedClass()
                 |}
             """.trimMargin(),
         )

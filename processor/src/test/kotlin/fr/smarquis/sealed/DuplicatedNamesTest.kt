@@ -41,7 +41,7 @@ class DuplicatedNamesTest {
                 |@SealedObjectInstances(name = "values", rawType = Array)
                 |@SealedObjectInstances(name = "values", rawType = List)
                 |sealed class MySealedClass {
-                |    object Object: MySealedClass()
+                |    data object Object: MySealedClass()
                 |}
             """.trimMargin(),
         )

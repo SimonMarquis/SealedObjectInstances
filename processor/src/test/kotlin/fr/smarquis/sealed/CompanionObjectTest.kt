@@ -22,8 +22,8 @@ class CompanionObjectTest {
 
     @SealedObjectInstances
     sealed class AnnotatedSealedClassWithCompanionObject {
-        companion object
-        object INSTANCE : AnnotatedSealedClassWithCompanionObject()
+        companion object;
+        data object INSTANCE : AnnotatedSealedClassWithCompanionObject()
     }
 
     @Test
@@ -33,8 +33,8 @@ class CompanionObjectTest {
     )
 
     sealed class SealedClassWithAnnotatedCompanionObject {
-        @SealedObjectInstances companion object
-        object INSTANCE : SealedClassWithAnnotatedCompanionObject()
+        @SealedObjectInstances companion object;
+        data object INSTANCE : SealedClassWithAnnotatedCompanionObject()
     }
 
     @Test
@@ -46,8 +46,8 @@ class CompanionObjectTest {
     @SealedObjectInstances(name = "onSealedClass")
     sealed class SealedClassWithCompanionObjectBothAnnotated {
         @SealedObjectInstances(name = "onCompanionObject")
-        companion object
-        object INSTANCE : SealedClassWithCompanionObjectBothAnnotated()
+        companion object;
+        data object INSTANCE : SealedClassWithCompanionObjectBothAnnotated()
     }
 
     @Test
@@ -58,7 +58,7 @@ class CompanionObjectTest {
 
     sealed class SealedClassWithNameCompanionObject {
         @SealedObjectInstances companion object Foo
-        object INSTANCE : SealedClassWithNameCompanionObject()
+        data object INSTANCE : SealedClassWithNameCompanionObject()
     }
 
     @Test
@@ -69,8 +69,8 @@ class CompanionObjectTest {
 
     @SealedObjectInstances
     sealed class AnnotatedSealedClassWithGeneric<T> {
-        companion object
-        object INSTANCE : AnnotatedSealedClassWithGeneric<Unit>()
+        companion object;
+        data object INSTANCE : AnnotatedSealedClassWithGeneric<Unit>()
     }
 
     @Test

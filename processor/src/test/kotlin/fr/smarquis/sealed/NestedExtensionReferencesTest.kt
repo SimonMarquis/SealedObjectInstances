@@ -22,7 +22,7 @@ class NestedExtensionReferencesTest {
 
     @SealedObjectInstances
     sealed class Sealed {
-        object Object : Sealed()
+        data object Object : Sealed()
         companion object {
             val values get() = Sealed.sealedObjectInstances()
             val lazyValues by lazy(Companion::sealedObjectInstances)

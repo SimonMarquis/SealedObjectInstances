@@ -23,7 +23,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedSingleGeneric<T> {
-        object INSTANCE : SealedSingleGeneric<Exception>()
+        data object INSTANCE : SealedSingleGeneric<Exception>()
     }
 
     @Test
@@ -34,7 +34,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedMultipleGenerics<A, B, C> {
-        object INSTANCE : SealedMultipleGenerics<Any, Unit, String>()
+        data object INSTANCE : SealedMultipleGenerics<Any, Unit, String>()
     }
 
     @Test
@@ -45,7 +45,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedCovariantGeneric<out T> {
-        object INSTANCE : SealedCovariantGeneric<String>()
+        data object INSTANCE : SealedCovariantGeneric<String>()
     }
 
     @Test
@@ -56,7 +56,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedCovariantBoundedGeneric<out T : Number> {
-        object INSTANCE : SealedCovariantBoundedGeneric<Long>()
+        data object INSTANCE : SealedCovariantBoundedGeneric<Long>()
     }
 
     @Test
@@ -67,7 +67,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedContravariantGeneric<in T> {
-        object INSTANCE : SealedContravariantGeneric<String>()
+        data object INSTANCE : SealedContravariantGeneric<String>()
     }
 
     @Test
@@ -78,7 +78,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedContravariantBoundedGeneric<in T : Number> {
-        object INSTANCE : SealedContravariantBoundedGeneric<Long>()
+        data object INSTANCE : SealedContravariantBoundedGeneric<Long>()
     }
 
     @Test
@@ -89,7 +89,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedBoundedSingleGeneric<T : Exception> {
-        object INSTANCE : SealedBoundedSingleGeneric<RuntimeException>()
+        data object INSTANCE : SealedBoundedSingleGeneric<RuntimeException>()
     }
 
     @Test
@@ -100,7 +100,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedBoundedMultipleGeneric<A : Any, E : Exception, N : Number> {
-        object INSTANCE : SealedBoundedMultipleGeneric<String, RuntimeException, Int>()
+        data object INSTANCE : SealedBoundedMultipleGeneric<String, RuntimeException, Int>()
     }
 
     @Test
@@ -111,7 +111,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedBoundedCovariantGeneric<out T : Exception> {
-        object INSTANCE : SealedBoundedCovariantGeneric<RuntimeException>()
+        data object INSTANCE : SealedBoundedCovariantGeneric<RuntimeException>()
     }
 
     @Test
@@ -122,7 +122,7 @@ class SealedGenericsTest {
 
     @SealedObjectInstances
     sealed class SealedBoundedContravariantGeneric<in T : Exception> {
-        object INSTANCE : SealedBoundedContravariantGeneric<RuntimeException>()
+        data object INSTANCE : SealedBoundedContravariantGeneric<RuntimeException>()
     }
 
     @Test
