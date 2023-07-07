@@ -15,14 +15,17 @@
  */
 package fr.smarquis.sealed
 
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode
 import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspWithCompilation
 import com.tschuchort.compiletesting.symbolProcessorProviders
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
+@OptIn(ExperimentalCompilerApi::class)
 class ReturnTypeTest {
 
     @Test
@@ -94,6 +97,6 @@ class ReturnTypeTest {
         inheritClassPath = true
     }.compile()
 
-    private fun KotlinCompilation.Result.resolve(relative: String) =
+    private fun JvmCompilationResult.resolve(relative: String) =
         outputDirectory.parentFile.resolve("ksp/sources/kotlin/$relative")
 }

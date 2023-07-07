@@ -21,12 +21,14 @@ import com.tschuchort.compiletesting.kspWithCompilation
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import fr.smarquis.sealed.SealedObjectInstances.Visibility.Internal
 import fr.smarquis.sealed.SealedObjectInstances.Visibility.Public
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import kotlin.reflect.KVisibility.INTERNAL
 import kotlin.reflect.KVisibility.PUBLIC
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 
+@OptIn(ExperimentalCompilerApi::class)
 class VisibilityModifiersTest {
 
     @SealedObjectInstances
