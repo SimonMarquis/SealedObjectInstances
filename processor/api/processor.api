@@ -18,6 +18,7 @@ public final class fr/smarquis/sealed/SealedObjectInstances$RawType : java/lang/
 	public static final field Array Lfr/smarquis/sealed/SealedObjectInstances$RawType;
 	public static final field List Lfr/smarquis/sealed/SealedObjectInstances$RawType;
 	public static final field Set Lfr/smarquis/sealed/SealedObjectInstances$RawType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lfr/smarquis/sealed/SealedObjectInstances$RawType;
 	public static fun values ()[Lfr/smarquis/sealed/SealedObjectInstances$RawType;
 }
@@ -27,6 +28,7 @@ public final class fr/smarquis/sealed/SealedObjectInstances$Visibility : java/la
 	public static final field Private Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
 	public static final field Public Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
 	public static final field Unspecified Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
 	public static fun values ()[Lfr/smarquis/sealed/SealedObjectInstances$Visibility;
 }

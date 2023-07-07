@@ -22,8 +22,8 @@ class IdenticalAnnotationsTest {
 
     @SealedObjectInstances
     sealed class IdenticalAnnotations {
-        @SealedObjectInstances companion object
-        object INSTANCE : IdenticalAnnotations()
+        @SealedObjectInstances companion object;
+        data object INSTANCE : IdenticalAnnotations()
     }
 
     @Test

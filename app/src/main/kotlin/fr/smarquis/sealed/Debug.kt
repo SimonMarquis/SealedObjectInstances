@@ -16,8 +16,8 @@
 package fr.smarquis.sealed
 
 sealed class Debug(override val isEnabled: Boolean = false) : FeatureFlag() {
-    @SealedObjectInstances companion object
-    object Logs : Debug(true)
-    object Traces : Debug()
-    object StrictMode : Debug()
+    @SealedObjectInstances companion object;
+    data object Logs : Debug(true)
+    data object Traces : Debug()
+    data object StrictMode : Debug()
 }

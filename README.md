@@ -16,18 +16,18 @@ sealed class FeatureFlag {
 
 ```kotlin
 // Debug.kt
-sealed class Debug(override val isEnabled: Boolean = false): FeatureFlag() {
-    object Logs: Debug(true)
-    object Traces: Debug()
-    object StrictMode: Debug()
+sealed class Debug(override val isEnabled: Boolean = false) : FeatureFlag() {
+    data object Logs : Debug(true)
+    data object Traces : Debug()
+    data object StrictMode : Debug()
 }
 ```
 
 ```kotlin
 // UI.kt
-sealed class UI(override val isEnabled: Boolean = false): FeatureFlag() {
-    object Animations: UI()
-    object Framerate: UI()
+sealed class UI(override val isEnabled: Boolean = false) : FeatureFlag() {
+    data object Animations : UI()
+    data object Framerate : UI()
 }
 ```
 
@@ -54,7 +54,7 @@ val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 > You can annotate the `companion object` to access a simpler extension function (no more `::class` prefix).
 > ```kotlin
 > sealed class FeatureFlag {
->     @SealedObjectInstances companion object
+>     @SealedObjectInstances companion object;
 >     /*...*/
 > }
 >

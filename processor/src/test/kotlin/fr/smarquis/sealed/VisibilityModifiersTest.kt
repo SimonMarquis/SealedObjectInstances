@@ -33,7 +33,7 @@ class VisibilityModifiersTest {
 
     @SealedObjectInstances
     sealed class SealedUnspecifiedVisibility {
-        object INSTANCE : SealedUnspecifiedVisibility()
+        data object INSTANCE : SealedUnspecifiedVisibility()
     }
 
     @Test
@@ -43,7 +43,7 @@ class VisibilityModifiersTest {
     @Suppress("RedundantVisibilityModifier")
     @SealedObjectInstances
     public sealed class SealedImplicitPublicVisibility {
-        object INSTANCE : SealedImplicitPublicVisibility()
+        data object INSTANCE : SealedImplicitPublicVisibility()
     }
 
     @Test
@@ -52,7 +52,7 @@ class VisibilityModifiersTest {
 
     @SealedObjectInstances(visibility = Public)
     sealed class SealedExplicitPublicVisibility {
-        object INSTANCE : SealedExplicitPublicVisibility()
+        data object INSTANCE : SealedExplicitPublicVisibility()
     }
 
     @Test
@@ -61,7 +61,7 @@ class VisibilityModifiersTest {
 
     @SealedObjectInstances
     internal sealed class SealedImplicitInternalVisibility {
-        object INSTANCE : SealedImplicitInternalVisibility()
+        data object INSTANCE : SealedImplicitInternalVisibility()
     }
 
     @Test
@@ -70,7 +70,7 @@ class VisibilityModifiersTest {
 
     @SealedObjectInstances(visibility = Internal)
     sealed class SealedExplicitInternalVisibility {
-        object INSTANCE : SealedExplicitInternalVisibility()
+        data object INSTANCE : SealedExplicitInternalVisibility()
     }
 
     @Test
@@ -112,7 +112,7 @@ class VisibilityModifiersTest {
                 |
                 |@SealedObjectInstances
                 |private sealed class MySealedClass {
-                |    object Object: MySealedClass()
+                |    data object Object: MySealedClass()
                 |}
             """.trimMargin(),
         )
@@ -177,7 +177,7 @@ class VisibilityModifiersTest {
                 |
                 |@SealedObjectInstances(visibility = Public)
                 |internal sealed class MySealedClass {
-                |    object Object: MySealedClass()
+                |    data object Object: MySealedClass()
                 |}
             """.trimMargin(),
         )
