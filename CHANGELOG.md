@@ -6,9 +6,9 @@
 
 _2023-07-09_
 
-- Update Kotlin 1.9.0 in #89
-- Update Gradle 8.2 in #114
-- Migrate compiler tests to [ZacSweers/kotlin-compile-testing](https://github.com/ZacSweers/redacted-compiler-plugin) in #115
+- Update Kotlin 1.9.0 in https://github.com/SimonMarquis/SealedObjectInstances/pull/89
+- Update Gradle 8.2 in https://github.com/SimonMarquis/SealedObjectInstances/pull/114
+- Migrate compiler tests to [ZacSweers/kotlin-compile-testing](https://github.com/ZacSweers/redacted-compiler-plugin) in https://github.com/SimonMarquis/SealedObjectInstances/pull/115
 
 ## [1.7.0]
 
