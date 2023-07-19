@@ -22,7 +22,7 @@ pluginManagement {
 
 plugins {
     id("com.gradle.enterprise") version "3.13.4"
-    id("com.gradle.common-custom-user-data-gradle-plugin") version "1.11"
+    id("com.gradle.common-custom-user-data-gradle-plugin") version "1.11.1"
 }
 
 rootProject.name = "sealed-object-instances"
