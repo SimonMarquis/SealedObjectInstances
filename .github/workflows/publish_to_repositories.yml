@@ -32,12 +32,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build
-        uses: gradle/gradle-build-action@915a66c096a03101667f9df2e56c9efef558b165 # v2.6.1
+        uses: gradle/gradle-build-action@a4cf152f482c7ca97ef56ead29bf08bcd953284c # v2.7.0
         with:
           arguments: build --stacktrace
       - name: Publish to MavenLocal
         if: ${{ inputs.MavenLocal }}
-        uses: gradle/gradle-build-action@915a66c096a03101667f9df2e56c9efef558b165 # v2.6.1
+        uses: gradle/gradle-build-action@a4cf152f482c7ca97ef56ead29bf08bcd953284c # v2.7.0
         with:
           arguments: publishAllPublicationsToMavenLocalRepository
         env:
@@ -51,7 +51,7 @@ jobs:
           path: build/.m2/repository
       - name: Publish to GitHub
         if: ${{ inputs.GitHub }}
-        uses: gradle/gradle-build-action@915a66c096a03101667f9df2e56c9efef558b165 # v2.6.1
+        uses: gradle/gradle-build-action@a4cf152f482c7ca97ef56ead29bf08bcd953284c # v2.7.0
         with:
           arguments: publishAllPublicationsToGitHubRepository
         env:
@@ -60,7 +60,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
       - name: Publish to OSSRH
         if: ${{ inputs.OSSRH }}
-        uses: gradle/gradle-build-action@915a66c096a03101667f9df2e56c9efef558b165 # v2.6.1
+        uses: gradle/gradle-build-action@a4cf152f482c7ca97ef56ead29bf08bcd953284c # v2.7.0
         with:
           arguments: publishAllPublicationsToOSSRHRepository
         env:
