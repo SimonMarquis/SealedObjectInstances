@@ -1,0 +1,64 @@
+name: 🐘 Gradle experiments
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * MON"
+
+env:
+  GRADLE_ENTERPRISE_URL: "https://scans.gradle.com"
+  GIT_REPO: "https://github.com/SimonMarquis/SealedObjectInstances"
+  TASKS: "build"
+
+jobs:
+
+  build-cache-compatibility:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        experiment: [1, 2, 3]
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Download latest version of the validation scripts
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run experiment 1
+        if: matrix.experiment == 1
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          tasks: ${{ env.TASKS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+      - name: Run experiment 2
+        if: matrix.experiment == 2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          tasks: ${{ env.TASKS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: true
+      - name: Run experiment 3
+        if: matrix.experiment == 3
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          tasks: ${{ env.TASKS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: true
+
+  build-configuration-compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Run configuration cache experiment
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
+        with:
+          tasks: ${{ env.TASKS }}
