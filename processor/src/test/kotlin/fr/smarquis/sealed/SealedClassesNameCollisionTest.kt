@@ -15,11 +15,9 @@
  */
 package fr.smarquis.sealed
 
-import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode
 import com.tschuchort.compiletesting.SourceFile
-import com.tschuchort.compiletesting.kspWithCompilation
-import com.tschuchort.compiletesting.symbolProcessorProviders
+import com.tschuchort.compiletesting.compile
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.Test
 import kotlin.test.assertContains
@@ -47,12 +45,7 @@ class SealedClassesNameCollisionTest {
         )
 
         /* When */
-        val result = KotlinCompilation().apply {
-            sources = listOf(source)
-            symbolProcessorProviders = listOf(SealedObjectInstancesProcessorProvider())
-            kspWithCompilation = true
-            inheritClassPath = true
-        }.compile()
+        val result = compile(source)
 
         /* Then */
         assertEquals(ExitCode.INTERNAL_ERROR, result.exitCode)
