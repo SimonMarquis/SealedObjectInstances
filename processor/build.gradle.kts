@@ -48,6 +48,7 @@ tasks.withType<KotlinCompile> {
     compilerOptions {
         allWarningsAsErrors.set(true)
         jvmTarget.set(JVM_11)
+        freeCompilerArgs.add("-Xsuppress-version-warnings")
     }
 }
 
