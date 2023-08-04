@@ -50,7 +50,7 @@ And then you'll have access to the `sealedObjectInstances()` extension on the co
 val flags: Set<FeatureFlag> = FeatureFlag::class.sealedObjectInstances()
 ```
 
-> **Note**  
+> [!NOTE]  
 > You can annotate the `companion object` to access a simpler extension function (no more `::class` prefix).
 > ```kotlin
 > sealed class FeatureFlag {
@@ -85,7 +85,7 @@ dependencies {
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/SimonMarquis/SealedObjectInstances?label=%20&color=success)](https://github.com/SimonMarquis/SealedObjectInstances/packages/1674974/versions)
 
-> **Note**
+> [!NOTE]  
 > You'll need to create a personal access token (PAT) with the `read:packages` permission to be able to download from this repository.
 > https://docs.github.com/en/packages/learn-github-packages
 
