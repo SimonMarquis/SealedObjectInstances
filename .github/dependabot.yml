@@ -15,8 +15,9 @@ updates:
     groups:
       kotlin-ksp:
         patterns:
-          - "org.jetbrains.kotlin.jvm:*"
-          - "com.google.devtools.ksp:*"
+          - "org.jetbrains.kotlin:*"
+          - "org.jetbrains.kotlin.jvm"
+          - "com.google.devtools.ksp"
 registries:
   maven-google:
     type: "maven-repository"
