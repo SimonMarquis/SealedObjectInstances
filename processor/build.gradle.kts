@@ -44,14 +44,14 @@ kotlin {
     }
 }
 
-tasks.withType<KotlinCompile> {
+tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
         allWarningsAsErrors.set(true)
         jvmTarget.set(JVM_11)
     }
 }
 
-tasks.withType<AbstractArchiveTask> {
+tasks.withType<AbstractArchiveTask>().configureEach {
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
@@ -76,25 +76,25 @@ val javadocJar by tasks.registering(Jar::class) {
     archiveClassifier.set("javadoc")
 }
 
-val dokkaJavadoc by tasks.getting(DokkaTask::class) {
+tasks.dokkaJavadoc.configure {
     moduleName.set("SealedObjectInstances")
     outputDirectory.set(rootProject.buildDir.resolve("javadoc"))
 }
 
 val dokkaJavadocJar by tasks.registering(Jar::class) {
-    dependsOn(dokkaJavadoc)
-    from(dokkaJavadoc.outputDirectory)
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.get().outputDirectory)
     archiveClassifier.set("javadoc")
 }
 
-val dokkaHtml by tasks.getting(DokkaTask::class) {
+tasks.dokkaHtml.configure {
     moduleName.set("SealedObjectInstances")
     outputDirectory.set(rootProject.buildDir.resolve("dokka"))
 }
 
 val dokkaHtmlJar by tasks.registering(Jar::class) {
-    dependsOn(dokkaHtml)
-    from(dokkaHtml.outputDirectory)
+    dependsOn(tasks.dokkaHtml)
+    from(tasks.dokkaHtml.get().outputDirectory)
     archiveClassifier.set("html-docs")
 }
 
@@ -126,7 +126,7 @@ publishing {
     publications {
         register<MavenPublication>("SealedObjectInstances") {
             artifactId = project.property("artifactId") as String
-            from(components.getByName("kotlin"))
+            from(components.named("kotlin").get())
             artifact(sourcesJar)
             artifact(dokkaJavadocJar)
             artifact(dokkaHtmlJar)
@@ -164,11 +164,11 @@ signing {
     isRequired = true
 }
 
-tasks.withType<Sign> {
+tasks.withType<Sign>().configureEach {
     notCompatibleWithConfigurationCache("https://github.com/gradle/gradle/issues/13470")
 }
 
-tasks.withType<DokkaTask> {
+tasks.withType<DokkaTask>().configureEach {
     notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
 }
 
