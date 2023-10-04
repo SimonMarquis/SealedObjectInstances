@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.diffplug.gradle.spotless.SpotlessPlugin
+
 plugins {
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.ksp) apply false
@@ -27,7 +29,7 @@ buildscript {
 }
 
 allprojects {
-    apply(plugin = "com.diffplug.spotless")
+    apply<SpotlessPlugin>()
     spotless {
         val licenseHeader = rootProject.file("spotless/spotless.kt")
         format("misc") {
