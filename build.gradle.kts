@@ -50,7 +50,3 @@ allprojects {
         }
     }
 }
-
-repositories {
-    mavenCentral()
-}

@@ -20,6 +20,13 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+    }
+}
+
 plugins {
     id("com.gradle.enterprise") version "3.15"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "1.11.3"

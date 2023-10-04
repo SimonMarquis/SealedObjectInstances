@@ -172,10 +172,6 @@ tasks.withType<DokkaTask>().configureEach {
     notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     compileOnly(libs.kspApi)
     compileOnly(libs.kotlinReflect)
