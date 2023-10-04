@@ -22,12 +22,6 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-buildscript {
-    dependencies {
-        classpath(kotlin("gradle-plugin"))
-    }
-}
-
 allprojects {
     apply<SpotlessPlugin>()
     spotless {
