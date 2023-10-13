@@ -37,8 +37,8 @@ kotlin {
 
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
-        allWarningsAsErrors.set(true)
-        jvmTarget.set(JVM_11)
+        allWarningsAsErrors = true
+        jvmTarget = JVM_11
     }
 }
 

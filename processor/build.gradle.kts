@@ -46,8 +46,8 @@ kotlin {
 
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
-        allWarningsAsErrors.set(true)
-        jvmTarget.set(JVM_11)
+        allWarningsAsErrors = true
+        jvmTarget = JVM_11
     }
 }
 
@@ -68,34 +68,34 @@ tasks.test {
 
 val sourcesJar by tasks.registering(Jar::class) {
     from(sourceSets.main.get().allSource)
-    archiveClassifier.set("sources")
+    archiveClassifier = "sources"
 }
 
 val javadocJar by tasks.registering(Jar::class) {
     from(tasks.javadoc)
-    archiveClassifier.set("javadoc")
+    archiveClassifier = "javadoc"
 }
 
 tasks.dokkaJavadoc.configure {
-    moduleName.set("SealedObjectInstances")
-    outputDirectory.set(rootProject.buildDir.resolve("javadoc"))
+    moduleName = "SealedObjectInstances"
+    outputDirectory = rootProject.buildDir.resolve("javadoc")
 }
 
 val dokkaJavadocJar by tasks.registering(Jar::class) {
     dependsOn(tasks.dokkaJavadoc)
     from(tasks.dokkaJavadoc.get().outputDirectory)
-    archiveClassifier.set("javadoc")
+    archiveClassifier = "javadoc"
 }
 
 tasks.dokkaHtml.configure {
-    moduleName.set("SealedObjectInstances")
-    outputDirectory.set(rootProject.buildDir.resolve("dokka"))
+    moduleName = "SealedObjectInstances"
+    outputDirectory = rootProject.buildDir.resolve("dokka")
 }
 
 val dokkaHtmlJar by tasks.registering(Jar::class) {
     dependsOn(tasks.dokkaHtml)
     from(tasks.dokkaHtml.get().outputDirectory)
-    archiveClassifier.set("html-docs")
+    archiveClassifier = "html-docs"
 }
 
 publishing {
@@ -131,23 +131,23 @@ publishing {
             artifact(dokkaJavadocJar)
             artifact(dokkaHtmlJar)
             pom {
-                name.set("SealedObjectInstances")
-                description.set("A Kotlin Symbol Processor to list sealed object instances.")
-                url.set("https://github.com/SimonMarquis/SealedObjectInstances")
+                name = "SealedObjectInstances"
+                description = "A Kotlin Symbol Processor to list sealed object instances."
+                url = "https://github.com/SimonMarquis/SealedObjectInstances"
                 licenses {
                     license {
-                        name.set("Apache-2.0 license")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                        name = "Apache-2.0 license"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
                     }
                 }
                 developers {
                     developer {
-                        name.set("Simon Marquis")
-                        email.set("contact@simon-marquis.fr")
+                        name = "Simon Marquis"
+                        email = "contact@simon-marquis.fr"
                     }
                 }
                 scm {
-                    url.set("https://github.com/SimonMarquis/SealedObjectInstances")
+                    url = "https://github.com/SimonMarquis/SealedObjectInstances"
                 }
             }
         }
