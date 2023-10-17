@@ -32,14 +32,14 @@ allprojects {
         }
         kotlin {
             target("src/**/*.kt")
-            ktlint(libs.versions.ktlint.get())
+            ktlint()
             trimTrailingWhitespace()
             endWithNewline()
             licenseHeaderFile(licenseHeader)
             targetExclude("spotless/*.kt")
         }
         kotlinGradle {
-            ktlint(libs.versions.ktlint.get())
+            ktlint()
             trimTrailingWhitespace()
             endWithNewline()
             licenseHeaderFile(licenseHeader, "(import|plugins|buildscript|dependencies|pluginManagement|rootProject|@Suppress)")
