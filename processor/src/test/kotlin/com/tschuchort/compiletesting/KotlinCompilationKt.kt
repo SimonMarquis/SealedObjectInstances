@@ -27,5 +27,6 @@ fun compile(
     symbolProcessorProviders = listOf(SealedObjectInstancesProcessorProvider())
     kspWithCompilation = true
     inheritClassPath = true
+    kotlincArguments += listOf("-Xskip-prerelease-check")
     configure()
 }.compile()
