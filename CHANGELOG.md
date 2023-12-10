@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Provide default proguard file to prevent errors on Android consumers
+
 ## [1.8.0]
 
 _2023-07-09_
