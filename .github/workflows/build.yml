@@ -15,19 +15,19 @@ jobs:
       - name: Build
         run: ./gradlew build --stacktrace
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: processor/build/test-results/test
       - name: Upload test reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: processor/build/reports/tests/test
       - name: Build Maven artifact
         run: ./gradlew publishAllPublicationsToMavenLocalRepository --stacktrace
       - name: Upload Maven artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: maven
           path: build/.m2/repository
