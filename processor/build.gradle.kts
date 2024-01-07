@@ -77,7 +77,7 @@ val javadocJar by tasks.registering(Jar::class) {
 
 tasks.dokkaJavadoc.configure {
     moduleName = "SealedObjectInstances"
-    outputDirectory = rootProject.buildDir.resolve("javadoc")
+    outputDirectory = rootProject.layout.buildDirectory.dir("javadoc")
 }
 
 val dokkaJavadocJar by tasks.registering(Jar::class) {
@@ -88,7 +88,7 @@ val dokkaJavadocJar by tasks.registering(Jar::class) {
 
 tasks.dokkaHtml.configure {
     moduleName = "SealedObjectInstances"
-    outputDirectory = rootProject.buildDir.resolve("dokka")
+    outputDirectory = rootProject.layout.buildDirectory.dir("dokka")
 }
 
 val dokkaHtmlJar by tasks.registering(Jar::class) {
