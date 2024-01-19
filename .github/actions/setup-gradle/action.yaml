@@ -3,5 +3,5 @@ description: 'Gradle setup and wrapper validation'
 runs:
   using: composite
   steps:
-    - uses: gradle/gradle-build-action@d1b726d8c1e0cc120447ad1a950d6e6794c51ad8 # v2.9.0
+    - uses: gradle/gradle-build-action@42452daeb5b454a76f686a8e4de8234afd7b1f44 # v2.9.0
     - uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
