@@ -18,6 +18,7 @@ jobs:
       matrix:
         experiment: [1, 2, 3]
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
