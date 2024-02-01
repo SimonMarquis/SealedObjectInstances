@@ -174,11 +174,7 @@ internal class SealedObjectInstancesProcessor(
         }
     }.also { if (it == Private) environment.logger.error("Unsupported [private] visibility.", this) }
 
-    private fun Visibility.modifier() = when (this) {
-        Unspecified, Public -> "public"
-        Internal -> "internal"
-        Private -> "private"
-    }
+    private fun Visibility.modifier() = "private"
 
     private fun KSClassDeclaration.generics(): List<Pair<Variance, String?>>? = typeParameters
         .takeUnless { it.isEmpty() }
