@@ -1,5 +1,5 @@
 [versions]
-junit = "5.10.1"
+junit = "5.10.2"
 dokka = "1.9.10"
 kotlin = "2.0.0-Beta4"
 ksp = "2.0.0-Beta4-1.0.17"
@@ -17,5 +17,5 @@ kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.2" }
+binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.14.0" }
 spotless = { id = "com.diffplug.spotless", version = "6.25.0" }

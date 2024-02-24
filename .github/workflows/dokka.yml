@@ -29,8 +29,8 @@ jobs:
       - uses: ./.github/actions/setup-gradle
       - run: ./gradlew dokkaHtml
       - uses: actions/configure-pages@v4.0.0
-      - uses: actions/upload-pages-artifact@v3.0.0
+      - uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: 'build/dokka'
       - id: deployment
-        uses: actions/deploy-pages@v4.0.3
+        uses: actions/deploy-pages@v4.0.4
