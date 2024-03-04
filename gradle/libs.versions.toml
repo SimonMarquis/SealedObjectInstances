@@ -1,6 +1,6 @@
 [versions]
 junit = "5.10.2"
-dokka = "1.9.10"
+dokka = "1.9.20"
 kotlin = "1.9.22"
 ksp = "1.9.22-1.0.18"
 
