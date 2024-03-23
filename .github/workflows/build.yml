@@ -12,28 +12,33 @@ permissions:
 
 jobs:
   build_test_report:
-    name: Build → Test → Report
+    name: Build → Test → Report [useKSP2=${{ matrix.useKSP2 }}]
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        useKSP2: [true, false]
+
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
       - name: Build
-        run: ./gradlew build --stacktrace
+        run: ./gradlew build -Pksp.useKSP2=${{ matrix.useKSP2 }} --stacktrace
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
+          name: test-results-${{ matrix.useKSP2 }}
           path: processor/build/test-results/test
       - name: Upload test reports
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
+          name: test-reports-${{ matrix.useKSP2 }}
           path: processor/build/reports/tests/test
       - name: Build Maven artifact
         run: ./gradlew publishAllPublicationsToMavenLocalRepository --stacktrace
       - name: Upload Maven artifact
         uses: actions/upload-artifact@v4
         with:
-          name: maven
+          name: maven-${{ matrix.useKSP2 }}
           path: build/.m2/repository
