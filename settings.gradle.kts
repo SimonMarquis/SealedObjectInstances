@@ -28,8 +28,8 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.gradle.enterprise") version "3.16.2"
-    id("com.gradle.common-custom-user-data-gradle-plugin") version "1.13"
+    id("com.gradle.develocity") version "3.17"
+    id("com.gradle.common-custom-user-data-gradle-plugin") version "2.0"
 }
 
 rootProject.name = "sealed-object-instances"
@@ -39,13 +39,13 @@ include("app")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
-gradleEnterprise {
+develocity {
     buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
+        termsOfUseUrl = "https://gradle.com/terms-of-service"
+        termsOfUseAgree = "yes"
         if (System.getenv("CI").toBoolean()) {
-            publishAlways()
-            isUploadInBackground = false
+            publishing.onlyIf { true }
+            uploadInBackground = false
         }
     }
 }
