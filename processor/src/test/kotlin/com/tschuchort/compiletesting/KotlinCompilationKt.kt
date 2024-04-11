@@ -24,7 +24,7 @@ fun compile(
     configure: KotlinCompilation.() -> Unit = {},
 ): JvmCompilationResult = KotlinCompilation().apply {
     sources = source.asList()
-    symbolProcessorProviders = listOf(SealedObjectInstancesProcessorProvider())
+    symbolProcessorProviders = mutableListOf(SealedObjectInstancesProcessorProvider())
     kspWithCompilation = true
     inheritClassPath = true
     kotlincArguments += listOf("-Xskip-prerelease-check")
