@@ -15,17 +15,4 @@
  */
 package com.example
 
-import fr.smarquis.sealed.SealedObjectInstances
-
-sealed class Entity private constructor(private val id: String) {
-    data object Foo : Entity("Foo")
-    data object Bar : Entity("Bar")
-    data object Baz : Entity("Baz")
-
-    @SealedObjectInstances
-    companion object {
-        val all: Set<Entity> by lazy { all() }
-    }
-}
-
-internal expect fun Entity.Companion.all(): Set<Entity>
+internal actual fun Entity.Companion.all(): Set<Entity> = sealedObjectInstances()
