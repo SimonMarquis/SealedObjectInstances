@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.jvm)
@@ -33,9 +32,6 @@ kotlin {
     sourceSets.test {
         kotlin.srcDir("build/generated/ksp/test/kotlin")
     }
-}
-
-tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
         allWarningsAsErrors = true
         jvmTarget = JVM_11
