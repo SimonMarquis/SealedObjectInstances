@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
 
 plugins {
@@ -38,7 +42,18 @@ kotlin {
     }
 }
 
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events = setOf(SKIPPED, PASSED, FAILED)
+        showExceptions = true
+        showStackTraces = true
+        exceptionFormat = FULL
+    }
+}
+
 dependencies {
     implementation(projects.processor)
     ksp(projects.processor)
+    testImplementation(libs.kotlinTest)
 }
