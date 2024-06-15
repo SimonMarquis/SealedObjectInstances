@@ -16,6 +16,7 @@
 package com.tschuchort.compiletesting
 
 import fr.smarquis.sealed.SealedObjectInstancesProcessorProvider
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 
 @OptIn(ExperimentalCompilerApi::class)
@@ -24,8 +25,14 @@ fun compile(
     configure: KotlinCompilation.() -> Unit = {},
 ): JvmCompilationResult = KotlinCompilation().apply {
     sources = source.asList()
-    symbolProcessorProviders = listOf(SealedObjectInstancesProcessorProvider())
-    kspWithCompilation = true
+    languageVersion = "1.9"
     inheritClassPath = true
+    correctErrorTypes = true
+    verbose = true
+    configureKsp(useKsp2 = false) {
+        withCompilation = true
+        symbolProcessorProviders += SealedObjectInstancesProcessorProvider()
+        loggingLevels = CompilerMessageSeverity.entries.toSet()
+    }
     configure()
 }.compile()
