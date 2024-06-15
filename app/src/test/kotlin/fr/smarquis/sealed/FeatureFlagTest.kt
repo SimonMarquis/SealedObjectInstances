@@ -18,7 +18,6 @@ package fr.smarquis.sealed
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-
 class FeatureFlagTest {
 
     @Test
@@ -38,5 +37,4 @@ class FeatureFlagTest {
         expected = setOf(UI.Animations, UI.Framerate),
         actual = UI.sealedObjectInstances(),
     )
-
 }
