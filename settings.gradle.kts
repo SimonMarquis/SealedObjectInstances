@@ -35,6 +35,7 @@ plugins {
 rootProject.name = "sealed-object-instances"
 include("processor")
 include("app")
+include("multiplatform")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")

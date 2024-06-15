@@ -179,3 +179,4 @@ fun KClass<FeatureFlag>.values(): Array<FeatureFlag>
   ```kotlin
   sealed class `A-B-C`
   ```
+- [google/ksp#1651](https://github.com/google/ksp/issues/1651): KSP does not run on common multiplatform code, requiring an extra manual ["bridge" expect/actual method](https://github.com/SimonMarquis/SealedObjectInstances/blob/main/multiplatform/src/commonMain/kotlin/com/example/Entity.kt#L30).
