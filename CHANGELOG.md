@@ -3,6 +3,8 @@
 ## [Unreleased]
 
 - Provide default proguard file to prevent errors on Android consumers
+- Add basic unit tests in app module in https://github.com/SimonMarquis/SealedObjectInstances/pull/238
+- Kotlin Multiplatform example in https://github.com/SimonMarquis/SealedObjectInstances/pull/239
 
 ## [1.8.0]
 
