@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
-      - uses: gradle/actions/dependency-submission@d9336dac04dea2507a617466bc058a3def92b18b # v3.4.0
+      - uses: gradle/actions/dependency-submission@dbbdc275be76ac10734476cc723d82dfe7ec6eda # v3.4.2
