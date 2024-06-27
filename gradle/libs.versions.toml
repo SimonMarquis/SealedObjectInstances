@@ -1,5 +1,5 @@
 [versions]
-junit = "5.10.2"
+junit = "5.10.3"
 dokka = "1.9.20"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.22"
