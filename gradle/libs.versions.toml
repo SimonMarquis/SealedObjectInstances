@@ -8,7 +8,7 @@ ksp = "2.0.0-1.0.22"
 junitApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junitRuntime = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 # https://github.com/ZacSweers/kotlin-compile-testing
-kotlinCompileTestingKsp = { module = "dev.zacsweers.kctfork:ksp", version = "0.5.0" }
+kotlinCompileTestingKsp = { module = "dev.zacsweers.kctfork:ksp", version = "0.5.1" }
 kotlinReflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
