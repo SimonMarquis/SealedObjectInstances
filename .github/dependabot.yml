@@ -4,9 +4,7 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directories:
-      - "/"
-      - "/.github/actions/*"
-      - "/.github/workflows/*"
+      - "/.github/**"
     schedule:
       interval: "daily"
   - package-ecosystem: "gradle"
