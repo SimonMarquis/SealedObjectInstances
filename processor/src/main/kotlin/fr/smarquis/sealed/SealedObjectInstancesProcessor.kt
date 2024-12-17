@@ -46,9 +46,7 @@ import java.io.OutputStreamWriter
 import kotlin.reflect.KClass
 import kotlin.text.Typography.ellipsis
 
-internal class SealedObjectInstancesProcessor(
-    private val environment: SymbolProcessorEnvironment,
-) : SymbolProcessor {
+internal class SealedObjectInstancesProcessor(private val environment: SymbolProcessorEnvironment) : SymbolProcessor {
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
         resolver.getSymbolsWithAnnotation(SealedObjectInstances::class.qualifiedName!!)
