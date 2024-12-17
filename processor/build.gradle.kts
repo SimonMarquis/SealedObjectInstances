@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.binaryCompatibilityValidator)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.dokka.javadoc)
     `maven-publish`
     signing
 }
@@ -71,25 +72,23 @@ val javadocJar by tasks.registering(Jar::class) {
     archiveClassifier = "javadoc"
 }
 
-tasks.dokkaJavadoc.configure {
-    moduleName = "SealedObjectInstances"
-    outputDirectory = rootProject.layout.buildDirectory.dir("javadoc")
+dokka {
+    moduleName.set("SealedObjectInstances")
+    dokkaPublications.html {
+        outputDirectory.set(rootProject.layout.buildDirectory.dir("dokka"))
+    }
+    dokkaPublications.javadoc {
+        outputDirectory.set(rootProject.layout.buildDirectory.dir("javadoc"))
+    }
 }
 
 val dokkaJavadocJar by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaJavadoc)
-    from(tasks.dokkaJavadoc.get().outputDirectory)
+    from(tasks.dokkaGeneratePublicationJavadoc.flatMap { it.outputDirectory })
     archiveClassifier = "javadoc"
 }
 
-tasks.dokkaHtml.configure {
-    moduleName = "SealedObjectInstances"
-    outputDirectory = rootProject.layout.buildDirectory.dir("dokka")
-}
-
 val dokkaHtmlJar by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaHtml)
-    from(tasks.dokkaHtml.get().outputDirectory)
+    from(tasks.dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
     archiveClassifier = "html-docs"
 }
 
