@@ -49,10 +49,7 @@ annotation class SealedObjectInstances(
     val returnType: Boolean = true,
 ) {
 
-    enum class RawType(
-        internal val kClass: KClass<*>,
-        internal val builder: KFunction1<kotlin.Array<out Any>, Any>,
-    ) {
+    enum class RawType(internal val kClass: KClass<*>, internal val builder: KFunction1<kotlin.Array<out Any>, Any>) {
         Array(kotlin.Array::class, ::arrayOf),
         List(kotlin.collections.List::class, ::listOf),
         Set(kotlin.collections.Set::class, ::setOf),
