@@ -5,6 +5,7 @@
 - Provide default proguard file to prevent errors on Android consumers
 - Add basic unit tests in app module in https://github.com/SimonMarquis/SealedObjectInstances/pull/238
 - Kotlin Multiplatform example in https://github.com/SimonMarquis/SealedObjectInstances/pull/239
+- Gradle dependency signature verification in https://github.com/SimonMarquis/SealedObjectInstances/pull/307
 
 ## [1.8.0]
 
