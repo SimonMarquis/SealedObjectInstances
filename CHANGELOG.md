@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+- 
+
+## [1.9.0]
+
+_2024-12-17_
+
 - Provide default proguard file to prevent errors on Android consumers
 - Add basic unit tests in app module in https://github.com/SimonMarquis/SealedObjectInstances/pull/238
 - Kotlin Multiplatform example in https://github.com/SimonMarquis/SealedObjectInstances/pull/239
@@ -108,7 +114,8 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.8.0...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.9.0...HEAD
+[1.9.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.9.0
 [1.8.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.8.0
 [1.7.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.7.0
 [1.6.3]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.6.3
