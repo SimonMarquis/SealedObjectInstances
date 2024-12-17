@@ -1,0 +1,46 @@
+# Based on https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#force-deleting-cache-entries
+name: ♻️ Clear GitHub Actions cache
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [ closed ]
+
+env:
+  GH_REPO: ${{ github.repository }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  clear-cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: gh extension install actions/gh-actions-cache
+      - name: Clear cache entries
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          set +e
+          while :
+          do
+            entries=($(gh actions-cache list --sort size --order desc --limit 100 | cut -f 1))
+            if ((!${#entries[@]})); then break; fi
+            for key in "${entries[@]}"
+            do
+              gh actions-cache delete "$key" --confirm | sed -e 's/\x1b\[[0-9;]*m//g' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
+            done
+          done
+      - name: Clear cache entries from PR
+        if: github.event_name == 'pull_request'
+        env:
+          BRANCH: refs/pull/${{ github.event.pull_request.number }}/merge
+        run: |
+          set +e
+          while :
+          do
+            entries=($(gh actions-cache list --sort size --order desc --limit 100 --branch "$BRANCH" | cut -f 1))
+            if ((!${#entries[@]})); then break; fi
+            for key in "${entries[@]}"
+            do
+              gh actions-cache delete "$key" --branch "$BRANCH" --confirm | sed -e 's/\x1b\[[0-9;]*m//g' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
+            done
+          done
