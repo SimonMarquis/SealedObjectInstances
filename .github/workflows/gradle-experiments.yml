@@ -61,7 +61,7 @@ jobs:
           tasks: ${{ env.TASKS }}
           args: "--debug"
       - name: Archive configuration cache reports
-        if: always
+        if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: configuration-cache-reports
