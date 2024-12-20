@@ -55,8 +55,6 @@ jobs:
       - uses: ./.github/actions/setup-java
       # Force setup-gradle to prevent issue: https://github.com/gradle/develocity-build-validation-scripts/issues/776
       - uses: ./.github/actions/setup-gradle
-        with:
-          cache-disabled: true
       - name: Run configuration cache experiment
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
         with:
