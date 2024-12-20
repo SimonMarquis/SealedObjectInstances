@@ -56,6 +56,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Run experiment
         id: run
         run: |
