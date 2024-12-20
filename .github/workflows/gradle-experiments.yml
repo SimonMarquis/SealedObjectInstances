@@ -57,6 +57,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
+        with:
+          cache-disabled: true
       - name: Run configuration cache experiment
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
         with:
