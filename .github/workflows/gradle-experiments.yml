@@ -59,4 +59,4 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
         with:
           tasks: ${{ env.TASKS }}
-          args: "--info"
+          args: "--debug"
