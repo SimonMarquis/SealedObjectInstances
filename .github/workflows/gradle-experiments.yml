@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 env:
-  GRADLE_ENCRYPTION_KEY: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+  # GRADLE_ENCRYPTION_KEY: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
   DEVELOCITY_URL: "https://scans.gradle.com"
   GIT_REPO: "https://github.com/SimonMarquis/SealedObjectInstances"
   TASKS: "build"
@@ -56,6 +56,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
       - name: Run configuration cache experiment
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
         with:
