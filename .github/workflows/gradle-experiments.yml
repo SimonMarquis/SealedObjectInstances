@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 9 * * MON"
-  pull_request:
-    branches: [ main ]
 
 env:
   DEVELOCITY_URL: "https://scans.gradle.com"
@@ -63,9 +61,3 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
         with:
           tasks: ${{ env.TASKS }}
-      - name: Archive configuration cache reports
-        if: ${{ success() || failure() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: configuration-cache-reports
-          path: '**/configuration-cache-report.html'
