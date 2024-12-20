@@ -57,20 +57,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
-      - name: Run experiment
-        id: run
-        run: |
-          # Need to run both builds within same job id to avoid calculating task graph as
-          # configuration cache cannot be reused when environment variable 'GITHUB_ACTION' has changed
-          ./gradlew --configuration-cache build 2>&1 | tee -a /tmp/run-1.log
-          echo "configCacheStored=$(grep "Configuration cache entry stored" /tmp/run-1.log | wc -l)" >> $GITHUB_OUTPUT
-          ./gradlew --configuration-cache build 2>&1 | tee -a /tmp/run-2.log
-          echo "configCacheReused=$(grep "Configuration cache entry reused" /tmp/run-2.log | wc -l)" >> $GITHUB_OUTPUT
-        shell: bash
-      - name: Validate Gradle Configuration Cache compatibility
-        run: exit 3
-        if: steps.run.outputs.configCacheReused == '0' || steps.run.outputs.configCacheStored != steps.run.outputs.configCacheReused
-        shell: bash
+      - name: Run configuration cache experiment
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
+        with:
+          tasks: ${{ env.TASKS }}
       - name: Archive configuration cache reports
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
