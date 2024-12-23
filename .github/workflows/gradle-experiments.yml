@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 9 * * MON"
-  pull_request:
-    branches: [ main ]
 
 env:
   DEVELOCITY_URL: "https://scans.gradle.com"
