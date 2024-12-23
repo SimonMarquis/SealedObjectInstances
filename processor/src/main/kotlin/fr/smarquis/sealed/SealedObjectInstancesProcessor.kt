@@ -44,6 +44,7 @@ import fr.smarquis.sealed.SealedObjectInstances.Visibility.Unspecified
 import fr.smarquis.sealed.SealedObjectInstancesDataClass.Companion.toDataClass
 import java.io.OutputStreamWriter
 import kotlin.reflect.KClass
+
 import kotlin.text.Typography.ellipsis
 
 internal class SealedObjectInstancesProcessor(private val environment: SymbolProcessorEnvironment) : SymbolProcessor {
