@@ -21,19 +21,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
       - name: Download latest version of the validation scripts
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@45a6d97cd4a34b2ded628b7c74a97026b59e7ea3 # v2.7.2
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
         if: matrix.experiment == 1
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@45a6d97cd4a34b2ded628b7c74a97026b59e7ea3 # v2.7.2
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
       - name: Run experiment 2
         if: matrix.experiment == 2
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@45a6d97cd4a34b2ded628b7c74a97026b59e7ea3 # v2.7.2
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -41,7 +41,7 @@ jobs:
           failIfNotFullyCacheable: true
       - name: Run experiment 3
         if: matrix.experiment == 3
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@45a6d97cd4a34b2ded628b7c74a97026b59e7ea3 # v2.7.2
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -54,6 +54,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
       - name: Run configuration cache experiment
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@45a6d97cd4a34b2ded628b7c74a97026b59e7ea3 # v2.7.2
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           tasks: ${{ env.TASKS }}
