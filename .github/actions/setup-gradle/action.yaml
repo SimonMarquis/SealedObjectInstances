@@ -9,6 +9,10 @@ inputs:
     description: When 'true', all caching is disabled. No entries will be written to or read from the cache.
     required: false
     default: false
+  gradle-home-cache-strict-match:
+    description: When 'true', the action will not attempt to restore the Gradle User Home entries from other Jobs.
+    required: false
+    default: true
 
 runs:
   using: composite
@@ -18,3 +22,4 @@ runs:
         add-job-summary-as-pr-comment: on-failure
         cache-encryption-key: ${{ inputs.cache-encryption-key }}
         cache-disabled: ${{ inputs.cache-disabled }}
+        gradle-home-cache-strict-match: ${{ inputs.gradle-home-cache-strict-match }}
