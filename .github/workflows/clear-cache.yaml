@@ -14,6 +14,7 @@ permissions:
 env:
   GH_TOKEN: ${{ github.token }}
   GH_REPO: ${{ github.repository }}
+  GH_FORCE_TTY: true # Force terminal-style output even when the output is redirected
   NO_COLOR: 1 # Disable gh colored output to avoid sed -e 's/\x1b\[[0-9;]*m//g'
 
 jobs:
