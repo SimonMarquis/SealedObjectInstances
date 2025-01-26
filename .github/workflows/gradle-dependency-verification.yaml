@@ -33,8 +33,8 @@ jobs:
       - run: |
           if ! git diff --quiet --exit-code -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml';
           then
-            git config --global user.name "simon-marquis[bot]"
-            git config --global user.email "180743042+simon-marquis[bot]@users.noreply.github.com"
+            git config --global user.name "${APP_SLUG}[bot]"
+            git config --global user.email "${APP_USER_ID}+${APP_SLUG}[bot]@users.noreply.github.com>"
             git commit -m "🤖 Update Gradle dependency signatures" -m "[dependabot skip]" -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml'
             git show
             git push
@@ -42,3 +42,6 @@ jobs:
           else
             echo "::notice::UP-TO-DATE"
           fi
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          APP_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
