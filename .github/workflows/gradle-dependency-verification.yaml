@@ -1,0 +1,47 @@
+name: 🤖 Gradle dependency verification
+
+on:
+  pull_request:
+    paths:
+      - '**.gradle.kts'
+      - '**/*.versions.toml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  verification:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/gradle/')
+    steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ steps.app-token.outputs.token }}
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - run: ./gradlew --write-verification-metadata pgp,sha256 --export-keys help
+      - run: |
+          if ! git diff --quiet --exit-code -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml';
+          then
+            git config --global user.name "${APP_SLUG}[bot]"
+            git config --global user.email "${APP_USER_ID}+${APP_SLUG}[bot]@users.noreply.github.com>"
+            git commit -m "🤖 Update Gradle dependency signatures" -m "[dependabot skip]" -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml'
+            git show
+            git push
+            echo "::notice::UPDATED"
+          else
+            echo "::notice::UP-TO-DATE"
+          fi
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          APP_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
