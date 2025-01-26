@@ -47,6 +47,14 @@ jobs:
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
+      - name: Upload build reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-test-results
+          path: |
+            build/reports/configuration-cache/**/.html
+            build/reports/problems/problems-report.html
 
   build-configuration-compatibility:
     runs-on: ubuntu-latest
@@ -57,3 +65,11 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           tasks: ${{ env.TASKS }}
+      - name: Upload build reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-test-results
+          path: |
+            build/reports/configuration-cache/**/.html
+            build/reports/problems/problems-report.html
