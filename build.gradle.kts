@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessPlugin
 
 plugins {
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.binaryCompatibilityValidator) apply false
-    alias(libs.plugins.spotless)
+    alias(libs.plugins.spotless) apply false
 }
 
 allprojects {
+    if (providers.gradleProperty("spotless").map(String::toBoolean).orNull != true) return@allprojects
     apply<SpotlessPlugin>()
-    spotless {
+    extensions.configure<SpotlessExtension> {
         val licenseHeader = rootProject.file("spotless/spotless.kt")
         format("misc") {
             target("**/*.md", "**/.gitignore")
