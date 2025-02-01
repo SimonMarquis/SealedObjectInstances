@@ -2,9 +2,7 @@ name: 🤖 Gradle dependency verification
 
 on:
   pull_request:
-    paths:
-      - '**.gradle.kts'
-      - '**/*.versions.toml'
+    branches: [ dependabot/gradle/** ]
 
 permissions:
   contents: write
