@@ -8,7 +8,7 @@ on:
 env:
   DEVELOCITY_URL: "https://scans.gradle.com"
   GIT_REPO: "https://github.com/SimonMarquis/SealedObjectInstances"
-  TASKS: "build -x spotlessCheck"
+  TASKS: "build"
 
 jobs:
 
