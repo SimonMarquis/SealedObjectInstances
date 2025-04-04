@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/gradle/')
     steps:
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v2
         id: app-token
         with:
           app-id: ${{ vars.BOT_APP_ID }}
