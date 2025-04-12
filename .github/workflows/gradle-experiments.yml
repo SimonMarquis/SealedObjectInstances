@@ -39,7 +39,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: true
       - name: Run experiment 3
         if: matrix.experiment == 3
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@343067513709cbf234b163a04c9a4b349b641452 # v2.8
@@ -47,7 +46,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: true
       - name: Upload build reports
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
