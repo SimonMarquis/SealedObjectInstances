@@ -159,13 +159,13 @@ signing {
 }
 
 dependencies {
-    compileOnly(libs.kspApi)
-    compileOnly(libs.kotlinReflect)
+    compileOnly(libs.ksp.api)
+    compileOnly(libs.kotlin.reflect)
     kspTest(projects.processor)
-    testRuntimeOnly(libs.junitRuntime)
-    testImplementation(libs.kspApi)
-    testImplementation(libs.kotlinTest)
-    testImplementation(libs.junitApi)
-    testImplementation(libs.kotlinCompileTestingKsp)
-    testImplementation(libs.kotlinReflect)
+    testRuntimeOnly(libs.junit.runtime)
+    testImplementation(libs.ksp.api)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.junit.api)
+    testImplementation(libs.kotlin.compileTestingKsp)
+    testImplementation(libs.kotlin.reflect)
 }

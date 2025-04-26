@@ -5,18 +5,18 @@ kotlin = "2.1.20"
 ksp = "2.1.20-2.0.0"
 
 [libraries]
-junitApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
-junitRuntime = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-runtime = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 # https://github.com/ZacSweers/kotlin-compile-testing
-kotlinCompileTestingKsp = { module = "dev.zacsweers.kctfork:ksp", version = "0.7.0" }
-kotlinReflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+kotlin-compileTestingKsp = "dev.zacsweers.kctfork:ksp:0.7.0"
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 [plugins]
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.17.0"
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 dokka-javadoc = { id = "org.jetbrains.dokka-javadoc", version.ref = "dokka" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.17.0" }
-spotless = { id = "com.diffplug.spotless", version = "7.0.3" }
+spotless = "com.diffplug.spotless:7.0.3"

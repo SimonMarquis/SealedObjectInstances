@@ -29,7 +29,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(libs.kotlinTest)
+                implementation(libs.kotlin.test)
             }
         }
     }
