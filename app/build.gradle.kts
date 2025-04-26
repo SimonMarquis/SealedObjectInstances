@@ -55,5 +55,5 @@ tasks.test {
 dependencies {
     implementation(projects.processor)
     ksp(projects.processor)
-    testImplementation(libs.kotlinTest)
+    testImplementation(libs.kotlin.test)
 }
