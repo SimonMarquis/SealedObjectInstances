@@ -25,6 +25,7 @@ plugins {
     alias(libs.plugins.binaryCompatibilityValidator)
     alias(libs.plugins.dokka)
     alias(libs.plugins.dokka.javadoc)
+    alias(libs.plugins.nmcp)
     `maven-publish`
     signing
 }
@@ -105,17 +106,6 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
-        maven {
-            name = "OSSRH"
-            url = when (version.toString().endsWith("-SNAPSHOT")) {
-                true -> "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                false -> "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            }.let(::uri)
-            credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_TOKEN")
-            }
-        }
     }
     publications {
         register<MavenPublication>("SealedObjectInstances") {
@@ -156,6 +146,12 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
     isRequired = true
+}
+
+nmcp.centralPortal {
+    username = System.getenv("CENTRAL_PORTAL_USERNAME")
+    password = System.getenv("CENTRAL_PORTAL_PASSWORD")
+    publishingType = "AUTOMATIC"
 }
 
 dependencies {
