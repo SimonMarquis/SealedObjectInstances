@@ -13,8 +13,8 @@ on:
         required: true
         default: false
         type: boolean
-      OSSRH:
-        description: 'Publish to OSSRH'
+      CentralPortal:
+        description: 'Publish to Central Portal'
         required: true
         default: false
         type: boolean
@@ -52,11 +52,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
-      - name: Publish to OSSRH
-        if: ${{ inputs.OSSRH }}
-        run: ./gradlew publishAllPublicationsToOSSRHRepository
+      - name: Publish to Central Portal
+        if: ${{ inputs.CentralPortal }}
+        run: ./gradlew publishAllPublicationsToCentralPortal
         env:
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
+          CENTRAL_PORTAL_USERNAME: ${{ secrets.CENTRAL_PORTAL_USERNAME }}
+          CENTRAL_PORTAL_PASSWORD: ${{ secrets.CENTRAL_PORTAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}

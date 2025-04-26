@@ -71,7 +71,7 @@ plugins {
 }
 ```
 
-Then add the library dependencies: [![Maven Central](https://img.shields.io/maven-central/v/fr.smarquis.sealed/sealed-object-instances?label=%20&color=success)](https://central.sonatype.com/artifact/fr.smarquis.sealed/sealed-object-instances) [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/fr.smarquis.sealed/sealed-object-instances?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/fr/smarquis/sealed/sealed-object-instances/)
+Then add the library dependencies: [![Maven Central](https://img.shields.io/maven-central/v/fr.smarquis.sealed/sealed-object-instances?label=%20&color=success)](https://central.sonatype.com/artifact/fr.smarquis.sealed/sealed-object-instances) [![Maven Central (SNAPSHOTS)](https://img.shields.io/nexus/s/fr.smarquis.sealed/sealed-object-instances?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/fr/smarquis/sealed/sealed-object-instances/)
 
 ```kotlin
 dependencies {
