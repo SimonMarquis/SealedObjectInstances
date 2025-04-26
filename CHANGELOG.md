@@ -4,6 +4,20 @@
 
 - 
 
+## [1.10.0]
+
+_2025-26-04_
+
+- 🐘 Fix `build-configuration-compatibility` Gradle experiment in https://github.com/SimonMarquis/SealedObjectInstances/pull/313
+- 🐘 Configure `gradle-home-cache-strict-match` to `true` by default in https://github.com/SimonMarquis/SealedObjectInstances/pull/320
+- 🐘 Extract build reports in `gradle-experiments.yml` in https://github.com/SimonMarquis/SealedObjectInstances/pull/325
+- ♻️ Migrate from `actions/gh-actions-cache` to official `gh cache` in https://github.com/SimonMarquis/SealedObjectInstances/pull/326
+- 🤖 Add Gradle dependency verification workflow in https://github.com/SimonMarquis/SealedObjectInstances/pull/328
+- ⚙️ Configure missing `.gitattributes` in https://github.com/SimonMarquis/SealedObjectInstances/pull/327
+- 🐘 Reset Gradle signatures in https://github.com/SimonMarquis/SealedObjectInstances/pull/331
+- ♻️ Cleanup dependency declarations in https://github.com/SimonMarquis/SealedObjectInstances/pull/360
+- 📦 Migrate from OSSRH to Central Portal in https://github.com/SimonMarquis/SealedObjectInstances/pull/361
+
 ## [1.9.0]
 
 _2024-12-17_
@@ -114,7 +128,8 @@ _2022-08-22_
 
 > **Note** 🎉 Initial release
 
-[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.9.0...HEAD
+[Unreleased]: https://github.com/SimonMarquis/SealedObjectInstances/compare/1.10.0...HEAD
+[1.10.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.10.0
 [1.9.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.9.0
 [1.8.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.8.0
 [1.7.0]: https://github.com/SimonMarquis/SealedObjectInstances/releases/tag/1.7.0
