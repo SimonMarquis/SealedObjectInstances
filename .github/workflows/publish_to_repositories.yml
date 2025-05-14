@@ -58,7 +58,7 @@ jobs:
         if: ${{ inputs.CentralPortal }}
         run: ./gradlew "$PUBLICATION_TASK"
         env:
-          PUBLICATION_TASK: ${{ endsWith(steps.gradle-properties.outputs.version, '-SNAPSHOT') && 'publishAllPublicationsToCentralPortal' || 'publishAllPublicationsToCentralSnapshots' }}
+          PUBLICATION_TASK: ${{ endsWith(steps.gradle-properties.outputs.version, '-SNAPSHOT') && 'publishAllPublicationsToCentralSnapshots' || 'publishAllPublicationsToCentralPortal' }}
           CENTRAL_PORTAL_USERNAME: ${{ secrets.CENTRAL_PORTAL_USERNAME }}
           CENTRAL_PORTAL_PASSWORD: ${{ secrets.CENTRAL_PORTAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_KEY }}
