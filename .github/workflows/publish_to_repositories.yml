@@ -31,6 +31,8 @@ jobs:
       - uses: ./.github/actions/setup-gradle
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - id: gradle-properties
+        run: echo "version=$(grep -Po '(?<=^version=).*' gradle.properties | head -1)" >> "$GITHUB_OUTPUT"
       - name: Build
         run: ./gradlew build --stacktrace
       - name: Publish to MavenLocal
@@ -54,8 +56,9 @@ jobs:
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
       - name: Publish to Central Portal
         if: ${{ inputs.CentralPortal }}
-        run: ./gradlew publishAllPublicationsToCentralPortal
+        run: ./gradlew "$PUBLICATION_TASK"
         env:
+          PUBLICATION_TASK: ${{ endsWith(steps.gradle-properties.outputs.version, '-SNAPSHOT') && 'publishAllPublicationsToCentralPortal' || 'publishAllPublicationsToCentralSnapshots' }}
           CENTRAL_PORTAL_USERNAME: ${{ secrets.CENTRAL_PORTAL_USERNAME }}
           CENTRAL_PORTAL_PASSWORD: ${{ secrets.CENTRAL_PORTAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_KEY }}
