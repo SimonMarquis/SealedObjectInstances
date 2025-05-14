@@ -36,6 +36,8 @@ jobs:
       - id: gradle-properties
         run: echo "version=$(grep -Po '(?<=^version=).*' gradle.properties | head -1)" >> "$GITHUB_OUTPUT"
       - run: echo "${{ steps.gradle-properties.outputs.version }}"
+      - if: ${{ endsWith(steps.gradle-properties.outputs.version, '-SNAPSHOT') }}
+        run: echo "SNAPSHOT!"
       - name: Build
         run: ./gradlew build --stacktrace
       - name: Publish to MavenLocal
