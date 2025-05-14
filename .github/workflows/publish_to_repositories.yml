@@ -1,6 +1,8 @@
 name: Publish to specific repositories
 
 on:
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       MavenLocal:
@@ -33,6 +35,7 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - id: gradle-properties
         run: echo "version=$(grep -Po '(?<=^version=).*' gradle.properties | head -1)" >> "$GITHUB_OUTPUT"
+      - run: echo "${{ steps.gradle-properties.outputs.version }}"
       - name: Build
         run: ./gradlew build --stacktrace
       - name: Publish to MavenLocal
