@@ -14,7 +14,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 [plugins]
-binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.17.0"
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.18.0"
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 dokka-javadoc = { id = "org.jetbrains.dokka-javadoc", version.ref = "dokka" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
