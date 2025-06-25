@@ -18,11 +18,11 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.binaryCompatibilityValidator)
     alias(libs.plugins.dokka)
     alias(libs.plugins.dokka.javadoc)
     alias(libs.plugins.nmcp)
@@ -46,6 +46,8 @@ kotlin {
         allWarningsAsErrors = true
         jvmTarget = JVM_11
     }
+    @OptIn(ExperimentalAbiValidation::class)
+    abiValidation.enabled = true
 }
 
 tasks.withType<AbstractArchiveTask>().configureEach {
