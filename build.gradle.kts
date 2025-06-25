@@ -19,7 +19,6 @@ import com.diffplug.gradle.spotless.SpotlessPlugin
 plugins {
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.binaryCompatibilityValidator) apply false
     alias(libs.plugins.spotless) apply false
 }
 
