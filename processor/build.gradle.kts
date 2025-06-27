@@ -150,7 +150,7 @@ signing {
     isRequired = true
 }
 
-nmcp.centralPortal {
+nmcp.publishAllPublicationsToCentralPortal {
     username = System.getenv("CENTRAL_PORTAL_USERNAME")
     password = System.getenv("CENTRAL_PORTAL_PASSWORD")
     publishingType = "AUTOMATIC"
