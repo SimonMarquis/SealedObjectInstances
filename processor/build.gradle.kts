@@ -156,6 +156,12 @@ nmcp.publishAllPublicationsToCentralPortal {
     publishingType = "AUTOMATIC"
 }
 
+val isSnapshotVersion = version.toString().endsWith("-SNAPSHOT")
+tasks.publish.configure {
+    if (isSnapshotVersion) dependsOn("publishAllPublicationsToCentralPortalSnapshots")
+    else dependsOn("publishAllPublicationsToCentralPortal")
+}
+
 dependencies {
     compileOnly(libs.ksp.api)
     compileOnly(libs.kotlin.reflect)
