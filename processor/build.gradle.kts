@@ -50,11 +50,6 @@ kotlin {
     abiValidation.enabled = true
 }
 
-tasks.withType<AbstractArchiveTask>().configureEach {
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
-}
-
 tasks.test {
     useJUnitPlatform()
     testLogging {
