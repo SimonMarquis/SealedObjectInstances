@@ -179,12 +179,12 @@ class VisibilityModifiersTest {
         assertContains(
             message = "Error message is printed for the receiver type",
             charSequence = result.messages,
-            other = "MySealedClass\$sealedObjectInstances.kt:2:12 'public' member exposes its 'internal' receiver type argument MySealedClass",
+            other = "MySealedClass\$sealedObjectInstances.kt:2:12 'public' member exposes its 'internal' receiver type argument 'MySealedClass'",
         )
         assertContains(
             message = "Error message is printed for the return type",
             charSequence = result.messages,
-            other = "MySealedClass\$sealedObjectInstances.kt:2:49 'public' function exposes its 'internal' return type argument MySealedClass",
+            other = "MySealedClass\$sealedObjectInstances.kt:2:49 'public' function exposes its 'internal' return type argument 'MySealedClass'",
         )
     }
 
@@ -212,7 +212,7 @@ class VisibilityModifiersTest {
         assertContains(
             message = "Error message is printed for the receiver type",
             charSequence = result.messages,
-            other = "MySealedClass\$sealedObjectInstances.kt:4:12 'public' member exposes its 'internal' receiver type Companion",
+            other = "MySealedClass\$sealedObjectInstances.kt:4:12 'public' member exposes its 'internal' receiver type 'Companion'",
         )
     }
 }

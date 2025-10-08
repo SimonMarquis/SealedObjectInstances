@@ -25,7 +25,7 @@ fun compile(
     configure: KotlinCompilation.() -> Unit = {},
 ): JvmCompilationResult = KotlinCompilation().apply {
     sources = source.asList()
-    languageVersion = "1.9"
+    languageVersion = "2.0"
     inheritClassPath = true
     correctErrorTypes = true
     verbose = true
