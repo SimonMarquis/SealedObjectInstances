@@ -29,7 +29,7 @@ fun compile(
     inheritClassPath = true
     correctErrorTypes = true
     verbose = true
-    configureKsp(useKsp2 = false) {
+    configureKsp {
         withCompilation = true
         symbolProcessorProviders += SealedObjectInstancesProcessorProvider()
         loggingLevels = CompilerMessageSeverity.entries.toSet()
