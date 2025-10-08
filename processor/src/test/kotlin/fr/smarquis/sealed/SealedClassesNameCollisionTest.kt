@@ -57,7 +57,7 @@ class SealedClassesNameCollisionTest {
         assertContains(
             message = "FileAlreadyExistsException is printed",
             charSequence = result.messages,
-            other = "e: [ksp] kotlin.io.FileAlreadyExistsException:",
+            other = "kotlin.io.FileAlreadyExistsException:",
         )
         assertContains(
             message = "Custom error message is printed",
