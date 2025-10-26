@@ -15,6 +15,7 @@
  */
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessPlugin
+import com.diffplug.spotless.LineEnding.GIT_ATTRIBUTES_FAST_ALLSAME
 
 plugins {
     alias(libs.plugins.jvm) apply false
@@ -27,6 +28,7 @@ allprojects {
     apply<SpotlessPlugin>()
     extensions.configure<SpotlessExtension> {
         val licenseHeader = rootProject.file("spotless/spotless.kt")
+        lineEndings = GIT_ATTRIBUTES_FAST_ALLSAME
         format("misc") {
             target("**/*.md", "**/.gitignore")
             endWithNewline()
