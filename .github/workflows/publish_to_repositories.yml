@@ -26,7 +26,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
         with:
