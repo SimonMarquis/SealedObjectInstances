@@ -19,7 +19,7 @@ jobs:
       matrix:
         experiment: [1, 2, 3]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-java
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@343067513709cbf234b163a04c9a4b349b641452 # v2.8
@@ -58,7 +58,7 @@ jobs:
   build-configuration-compatibility:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-java
       - name: Run configuration cache experiment
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@343067513709cbf234b163a04c9a4b349b641452 # v2.8
