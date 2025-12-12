@@ -48,7 +48,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
       - name: Upload build reports
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: "build-cache-compatibility-reports-${{ matrix.experiment }}"
           path: |
@@ -66,7 +66,7 @@ jobs:
           tasks: ${{ env.TASKS }}
       - name: Upload build reports
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: build-configuration-compatibility-reports
           path: |
