@@ -1,7 +1,7 @@
 [versions]
 junit = "5.13.4"
 dokka = "2.1.0"
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 ksp = "2.3.4"
 
 [libraries]
