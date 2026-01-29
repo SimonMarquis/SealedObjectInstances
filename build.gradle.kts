@@ -30,7 +30,7 @@ allprojects {
         val licenseHeader = rootProject.file("spotless/spotless.kt")
         lineEndings = GIT_ATTRIBUTES_FAST_ALLSAME
         format("misc") {
-            target("**/*.md", "**/.gitignore")
+            target("*.md", ".gitignore")
             endWithNewline()
         }
         kotlin {
