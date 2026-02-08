@@ -26,7 +26,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: test-results
-          path: **/build/test-results/**/TEST-*.xml
+          path: "**/build/test-results/**/TEST-*.xml"
       - name: Upload test reports
         uses: actions/upload-artifact@v6
         with:
