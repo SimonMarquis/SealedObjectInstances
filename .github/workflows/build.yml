@@ -23,19 +23,19 @@ jobs:
       - name: Build
         run: ./gradlew build checkLegacyAbi --stacktrace
       - name: Upload test results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: test-results
           path: "**/build/test-results/**/TEST-*.xml"
       - name: Upload test reports
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: test-reports
           path: processor/build/reports/tests/test
       - name: Build Maven artifact
         run: ./gradlew publishAllPublicationsToMavenLocalRepository --stacktrace
       - name: Upload Maven artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: maven
           path: build/.m2/repository
