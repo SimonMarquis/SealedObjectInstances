@@ -18,4 +18,4 @@ dokka-javadoc = { id = "org.jetbrains.dokka-javadoc", version.ref = "dokka" }
 jvm = "org.jetbrains.kotlin.jvm:2.3.20"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 nmcp = "com.gradleup.nmcp:1.4.4"
-spotless = "com.diffplug.spotless:8.3.0"
+spotless = "com.diffplug.spotless:8.4.0"
