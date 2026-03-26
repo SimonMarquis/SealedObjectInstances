@@ -1,6 +1,6 @@
 [versions]
 junit = "5.14.3"
-dokka = "2.1.0"
+dokka = "2.2.0"
 ksp = "2.3.6"
 
 [libraries]
