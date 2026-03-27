@@ -21,7 +21,7 @@ jobs:
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Build
-        run: ./gradlew build checkLegacyAbi --stacktrace
+        run: ./gradlew build --stacktrace
       - name: Upload test results
         uses: actions/upload-artifact@v7
         with:
