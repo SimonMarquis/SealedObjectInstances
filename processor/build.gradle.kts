@@ -47,7 +47,7 @@ kotlin {
         jvmTarget = JVM_11
     }
     @OptIn(ExperimentalAbiValidation::class)
-    abiValidation.enabled = true
+    abiValidation()
 }
 
 tasks.test {
