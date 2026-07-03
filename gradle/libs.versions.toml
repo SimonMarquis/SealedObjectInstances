@@ -2,6 +2,7 @@
 junit = "5.14.3"
 dokka = "2.2.0"
 ksp = "2.3.7"
+nmcp = "1.6.1"
 
 [libraries]
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
@@ -17,5 +18,6 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 dokka-javadoc = { id = "org.jetbrains.dokka-javadoc", version.ref = "dokka" }
 jvm = "org.jetbrains.kotlin.jvm:2.4.0"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-nmcp = "com.gradleup.nmcp:1.6.1"
+nmcp = { id = "com.gradleup.nmcp", version.ref = "nmcp" }
+nmcp-aggregation = { id = "com.gradleup.nmcp.aggregation", version.ref = "nmcp" }
 spotless = "com.diffplug.spotless:8.8.0"
