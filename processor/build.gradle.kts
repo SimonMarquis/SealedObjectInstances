@@ -156,7 +156,7 @@ nmcpAggregation {
 
 val isSnapshotVersion = version.toString().endsWith("-SNAPSHOT")
 tasks.publish.configure {
-    if (isSnapshotVersion) dependsOn("publishAggregationToCentralPortalSnapshots")
+    if (isSnapshotVersion) dependsOn("publishAggregationToCentralSnapshots")
     else dependsOn("publishAggregationToCentralPortal")
 }
 
