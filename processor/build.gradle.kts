@@ -26,6 +26,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.dokka.javadoc)
     alias(libs.plugins.nmcp)
+    alias(libs.plugins.nmcp.aggregation)
     `maven-publish`
     signing
 }
@@ -145,16 +146,18 @@ signing {
     isRequired = true
 }
 
-nmcp.publishAllPublicationsToCentralPortal {
-    username = System.getenv("CENTRAL_PORTAL_USERNAME")
-    password = System.getenv("CENTRAL_PORTAL_PASSWORD")
-    publishingType = "AUTOMATIC"
+nmcpAggregation {
+    centralPortal {
+        username = System.getenv("CENTRAL_PORTAL_USERNAME")
+        password = System.getenv("CENTRAL_PORTAL_PASSWORD")
+        publishingType = "AUTOMATIC"
+    }
 }
 
 val isSnapshotVersion = version.toString().endsWith("-SNAPSHOT")
 tasks.publish.configure {
-    if (isSnapshotVersion) dependsOn("publishAllPublicationsToCentralPortalSnapshots")
-    else dependsOn("publishAllPublicationsToCentralPortal")
+    if (isSnapshotVersion) dependsOn("publishAggregationToCentralPortalSnapshots")
+    else dependsOn("publishAggregationToCentralPortal")
 }
 
 dependencies {
