@@ -60,12 +60,12 @@ tasks.test {
     }
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
+val sourcesJar = tasks.register("sourcesJar", Jar::class) {
     from(sourceSets.main.get().allSource)
     archiveClassifier = "sources"
 }
 
-val javadocJar by tasks.registering(Jar::class) {
+val javadocJar = tasks.register("javadocJar", Jar::class) {
     from(tasks.javadoc)
     archiveClassifier = "javadoc"
 }
@@ -80,12 +80,12 @@ dokka {
     }
 }
 
-val dokkaJavadocJar by tasks.registering(Jar::class) {
+val dokkaJavadocJar = tasks.register("dokkaJavadocJar", Jar::class) {
     from(tasks.dokkaGeneratePublicationJavadoc.flatMap { it.outputDirectory })
     archiveClassifier = "javadoc"
 }
 
-val dokkaHtmlJar by tasks.registering(Jar::class) {
+val dokkaHtmlJar = tasks.register("dokkaHtmlJar", Jar::class) {
     from(tasks.dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
     archiveClassifier = "html-docs"
 }
@@ -137,8 +137,8 @@ publishing {
 
 /* https://docs.gradle.org/current/userguide/signing_plugin.html */
 signing {
-    val signingKey: String? by project
-    val signingPassword: String? by project
+    val signingKey: String? = project.findProperty("signingKey") as String?
+    val signingPassword: String? = project.findProperty("signingPassword") as String?
     if (signingKey == null || signingPassword == null) return@signing
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
