@@ -25,7 +25,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.dokka)
     alias(libs.plugins.dokka.javadoc)
-    alias(libs.plugins.nmcp)
     `maven-publish`
     signing
 }
@@ -143,12 +142,6 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
     isRequired = true
-}
-
-nmcp.publishAllPublicationsToCentralPortal {
-    username = System.getenv("CENTRAL_PORTAL_USERNAME")
-    password = System.getenv("CENTRAL_PORTAL_PASSWORD")
-    publishingType = "AUTOMATIC"
 }
 
 val isSnapshotVersion = version.toString().endsWith("-SNAPSHOT")
