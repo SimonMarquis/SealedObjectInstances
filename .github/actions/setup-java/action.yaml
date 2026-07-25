@@ -1,9 +1,9 @@
-name: '☕️ Setup Java'
-description: 'Java setup'
+name: ☕️ Setup Java
+description: Java setup
 runs:
   using: composite
   steps:
     - uses: actions/setup-java@v5
       with:
-        java-version: '21'
-        distribution: 'temurin'
+        java-version: 25
+        distribution: temurin
