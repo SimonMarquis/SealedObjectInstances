@@ -2,7 +2,7 @@
 junit = "5.14.3"
 dokka = "2.2.0"
 ksp = "2.3.7"
-nmcp = "1.6.1"
+nmcp = "1.6.2"
 
 [libraries]
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
