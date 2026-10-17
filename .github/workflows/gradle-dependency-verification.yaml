@@ -13,7 +13,7 @@ permissions:
 jobs:
   verification:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/gradle/')
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == github.event.pull_request.head.repo.full_name && startsWith(github.head_ref, 'dependabot/gradle/')
     steps:
       - uses: actions/create-github-app-token@v3
         id: app-token
