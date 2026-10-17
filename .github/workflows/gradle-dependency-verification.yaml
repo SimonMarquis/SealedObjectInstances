@@ -7,8 +7,7 @@ on:
       - '**/*.versions.toml'
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   verification:
@@ -20,6 +19,7 @@ jobs:
         with:
           client-id: ${{ vars.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
       - id: get-user-id
         run: echo "user-id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
         env:
