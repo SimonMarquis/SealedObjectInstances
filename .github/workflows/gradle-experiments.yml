@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: "0 9 * * MON"
 
+permissions:
+  contents: read
+  actions: write
+
 env:
   DEVELOCITY_URL: "https://scans.gradle.com"
   GIT_REPO: "https://github.com/SimonMarquis/SealedObjectInstances"
