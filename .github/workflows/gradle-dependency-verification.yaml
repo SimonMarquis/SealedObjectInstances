@@ -24,6 +24,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle
         with:
