@@ -12,23 +12,27 @@ permissions:
 jobs:
   verification:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == github.event.pull_request.head.repo.full_name && startsWith(github.head_ref, 'dependabot/gradle/')
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.repository == github.event.pull_request.head.repo.full_name &&
+      startsWith(github.head_ref, 'dependabot/gradle/')
     steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
+          persist-credentials: false
+      - uses: $/.github/actions/setup-java
+      - uses: $/.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
       - uses: SimonMarquis/setup-github-app-as-bot@v1
         id: app-token
         with:
           client-id: ${{ vars.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
           permission-contents: write
-      - uses: actions/checkout@v7
-        with:
-          ref: ${{ github.head_ref }}
-          token: ${{ steps.app-token.outputs.token }}
-          persist-credentials: true
-      - uses: $/.github/actions/setup-java
-      - uses: $/.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - run: |
           ./gradlew --write-verification-metadata pgp,sha256 --export-keys help
